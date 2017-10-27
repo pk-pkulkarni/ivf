@@ -97,8 +97,8 @@
             </span>
           </a>
           <ul class="treeview-menu">
-            <li class="active"><a href="index.html"><i class="fa fa-circle-o"></i> Dashboard v1</a></li>
-			<li><a href="add_user.html"><i class="fa fa-circle-o"></i> Add User</a></li>
+		    <li ><a href="index.html"><i class="fa fa-circle-o"></i> Dashboard v1</a></li>
+			<li class="active"><a href="index.html"><i class="fa fa-circle-o"></i> Add User</a></li>
             <li><a href="index2.html"><i class="fa fa-circle-o"></i> Dashboard v2</a></li>
           </ul>
         </li>
@@ -125,10 +125,80 @@
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
     <!-- Main content -->
-    <section class="content">     
-      <div data-ng-app="peopleApp">
-        <div data-ng-view class="people-app"></div>
-      </div>
+    <section class="content">
+	<div class="box box-info">
+		<div class="box-header with-border">
+		  <h3 class="box-title">Enter User Details</h3>
+		</div>	
+      <div class="box-body">
+        <div class="row">
+			<div class="col-md-12">
+			    <form class="form-horizontal" name="add_user_form" id = "add_user_form">
+			      <div class="box-body">
+			        <div class="form-group">
+			          <label class="col-sm-2 control-label">First Name</label>
+
+			          <div class="col-sm-10">
+			            <input type="text" class="form-control" id="firstname" placeholder="Enter First Name">
+			          </div>
+			        </div>
+			        <div class="form-group">
+			          <label class="col-sm-2 control-label">Last Name</label>
+
+			          <div class="col-sm-10">
+			            <input type="text" class="form-control" id="lastname" placeholder="Enter Last Name">
+			          </div>
+			        </div>
+			        <div class="form-group">
+			          <label class="col-sm-2 control-label">Email</label>
+
+			          <div class="col-sm-10">
+			            <input type="email" class="form-control" id="email" placeholder="Enter Email">
+			          </div>
+			        </div>
+			        <div class="form-group">
+			          <label for="inputPassword3" class="col-sm-2 control-label">Password</label>
+
+			          <div class="col-sm-10">
+			            <input type="password" class="form-control" id="password" placeholder="Set Password">
+			          </div>
+			        </div>
+			        <div class="form-group">
+			          <label class="col-sm-2 control-label">Contact</label>
+
+			          <div class="col-sm-10">
+			            <input type="text" class="form-control" id="contact" placeholder="Enter Contact No">
+			          </div>
+			        </div>
+			        <div class="form-group">
+			          <label class="col-sm-2 control-label">Select Role</label>
+
+			          <div class="col-sm-10">
+			            <select name="role" id="role">
+							<option value="1">Super Admin</option>
+							<option value="2">Center Admin</option>
+							<option value="3">Admin</option>
+						</select>
+			          </div>
+			        </div>
+			        <div class="form-group">
+			          <label class="col-sm-2 control-label">Select Center</label>
+
+						<select name="center" id="center">
+							<option value="1">Pune</option>
+						</select>
+			        </div>
+			      </div>
+			      <!-- /.box-body -->
+			      <div class="box-footer">
+			        <a id="save" class="btn btn-info pull-right">Save</a>
+			      </div>
+			      <!-- /.box-footer -->
+			    </form>
+			</div>
+		</div>
+	</div>
+	</div>
     </section>
     <!-- /.content -->
   </div>
@@ -155,6 +225,39 @@
 <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
 <script>
   $.widget.bridge('uibutton', $.ui.button);
+</script>
+<script>
+$('#save').click(function () {
+	$.ajax({
+		url: 'services/user/add.php',
+		type: 'POST',
+		dataType: "json",
+		data: {
+			firstname: $('#firstname').val(),
+			lastname: $('#lastname').val(),
+			email: $('#email').val(),
+			contact: $('#contact').val(),
+			password: $('#password').val(),
+			center_id: $('#center').val(),
+			role_id: $('#role').val(),
+		},
+		success: function (data)
+		{
+			if(data.error != undefined && data.error){
+				alert(data.error);
+			}
+			else{
+				if(data.success != undefined && data.success){
+					alert(data.success);
+					$('#add_user_form')[0].reset();
+				}
+				else{
+					alert("Something went wrong , Please Try again!");
+				}
+			}
+		}
+	});
+});
 </script>
 <!-- Bootstrap 3.3.6 -->
 <script src="bootstrap/js/bootstrap.min.js"></script>
