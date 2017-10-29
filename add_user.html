@@ -229,10 +229,11 @@
 <script>
 $('#save').click(function () {
 	$.ajax({
-		url: 'services/user/add.php',
+		url: 'services/user/UserOperations.php',
 		type: 'POST',
 		dataType: "json",
 		data: {
+			operation:"add",
 			firstname: $('#firstname').val(),
 			lastname: $('#lastname').val(),
 			email: $('#email').val(),
