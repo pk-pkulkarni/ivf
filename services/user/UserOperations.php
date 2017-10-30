@@ -49,6 +49,29 @@ function add($data){
 	echo json_encode($result);
 }
 
+function update($data){
+	global $conn;
+	$firstname = mysqli_real_escape_string($conn, $data['firstname']);
+	$lastname = mysqli_real_escape_string($conn, $data['lastname']);
+	//$email = $data['email'];
+	$contact =  $data['contact'];
+	$center_id = $data['center_id'];
+	$role_id = $data['role_id'];
+	$user_id = $data['user_id'];
+	
+	$result = array();
+
+	$sql = "update user set firstname = '$firstname',lastname = '$lastname',contact = $contact,center_id = $center_id,role_id = $role_id where user_id = $user_id";
+
+	if(mysqli_query($conn, $sql)){
+		$result['success'] = "Record is Updated Successfully";
+	} else{
+		$result['error'] = "ERROR: Could not able to execute $sql. " . mysqli_error($conn);
+	}
+
+	echo json_encode($result);
+}
+
 function get($data){
 	global $conn;
 	$sql = "select * from user";

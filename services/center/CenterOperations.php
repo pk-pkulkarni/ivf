@@ -46,6 +46,26 @@ function add($data){
 	echo json_encode($result);
 }
 
+function update($data){
+	global $conn;
+	$center_name = mysqli_real_escape_string($conn, $_REQUEST['center_name']);
+	$center_address = $_REQUEST['center_address'];
+	$doctor_id = (int)$_REQUEST['doctor_id'];
+	$center_id = (int)$_REQUEST['center_id'];
+	
+	$result = array();
+
+	$sql = "update center set center_name='$center_name',center_address='$center_address',doctor_id = $doctor_id where center_id = $center_id";
+
+	if(mysqli_query($conn, $sql)){
+		$result['success'] = "Record is Updated Successfully";
+	} else{
+		$result['error'] = "ERROR: Could not able to execute $sql. " . mysqli_error($conn);
+	}
+
+	echo json_encode($result);
+}
+
 function get($data){
 	global $conn;
 	$sql = "select * from center";
