@@ -31,10 +31,11 @@ function add($data){
 
 	$center_name = mysqli_real_escape_string($conn, $_REQUEST['center_name']);
 	$center_address = $_REQUEST['center_address'];
+	$doctor_id = (int)$_REQUEST['doctor_id'];
 	
 	$result = array();
 
-	$sql = "insert into center(center_name,center_address) values ('$center_name','$center_address')";
+	$sql = "insert into center(center_name,center_address,doctor_id) values ('$center_name','$center_address','$doctor_id')";
 
 	if(mysqli_query($conn, $sql)){
 		$result['success'] = "Record is Created Successfully";

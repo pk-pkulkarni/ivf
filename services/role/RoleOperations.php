@@ -27,31 +27,25 @@ switch ($operation) {
 	
 function add($data){
 	global $conn;
-	$firstname = mysqli_real_escape_string($conn, $data['firstname']);
-	$lastname = mysqli_real_escape_string($conn, $data['lastname']);
-	$email = $data['email'];
-	$contact =  $data['contact'];
-	$password = $data['password'];
-	$center_id = $data['center_id'];
-	$role_id = $data['role_id'];
-	$status_id = 1; // 1 is for Active
 	
 	$result = array();
 
-	$sql = "insert into user(firstname,lastname,email,contact,password,center_id,role_id,status_id) values ('$firstname','$lastname','$email','$contact','$password','$center_id','$role_id','$status_id')";
+	// If Role is being added then write code in this method
+	
+	/*$sql = "insert into role(name) values ('$name')";
 
 	if(mysqli_query($conn, $sql)){
 		$result['success'] = "Record is Created Successfully";
 	} else{
 		$result['error'] = "ERROR: Could not able to execute $sql. " . mysqli_error($conn);
-	}
+	}*/
 
 	echo json_encode($result);
 }
 
 function get($data){
 	global $conn;
-	$sql = "select * from user";
+	$sql = "select * from role";
 
 	$rows = $conn->query($sql);
 						
@@ -62,6 +56,3 @@ function get($data){
 
 	echo json_encode($result);
 }
-
-
-
