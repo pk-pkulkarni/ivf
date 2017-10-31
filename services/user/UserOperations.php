@@ -3,6 +3,7 @@
 include ("../config.php");
 include ("../common.php");
 
+$key = "aGGroCreeps!%#!`";
 
 $data = ($_REQUEST);
 $operation = "";
@@ -27,11 +28,13 @@ switch ($operation) {
 	
 function add($data){
 	global $conn;
+	global $key;
+	$encryptedPass = base64_encode($key.$data['password']);
 	$firstname = mysqli_real_escape_string($conn, $data['firstname']);
 	$lastname = mysqli_real_escape_string($conn, $data['lastname']);
 	$email = $data['email'];
 	$contact =  $data['contact'];
-	$password = $data['password'];
+	$password = $encryptedPass;
 	$center_id = $data['center_id'];
 	$role_id = $data['role_id'];
 	$status_id = 1; // 1 is for Active
