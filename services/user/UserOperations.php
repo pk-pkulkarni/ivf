@@ -3,7 +3,7 @@
 include ("../config.php");
 include ("../common.php");
 
-$key = "aGGroCreeps!%#!`";
+
 
 $data = ($_REQUEST);
 $operation = "";

@@ -229,7 +229,7 @@
 <script>
 $('#save').click(function () {
 	$.ajax({
-		url: 'services/user/UserOperations.php',
+		url: 'services/auth/Auth.php',
 		type: 'POST',
 		dataType: "json",
 		data: {
@@ -241,6 +241,8 @@ $('#save').click(function () {
 			password: $('#password').val(),
 			center_id: $('#center').val(),
 			role_id: $('#role').val(),
+			username:"p@test.com",
+			password:"test1234"
 		},
 		success: function (data)
 		{
