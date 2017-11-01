@@ -1,8 +1,8 @@
 <?php
 
 include ("../config.php");
-include ("../common.php");
-
+//include ("../common.php");// Common file is containing JWT script which is not needed while doing an authentication
+$key = "aGGroCreeps!%#!`";
 $userData = ($_REQUEST);
 $result = array();
 $username = $userData['username'];
