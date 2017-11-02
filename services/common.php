@@ -13,10 +13,10 @@ $returnData = [];
 global $conn;
 $receivedToken = "";
 $requestedData = (json_decode(file_get_contents("php://input"),true));
-if(isset($_REQUEST['token'])){
-	$receivedToken = $_REQUEST['token'];
+if(isset($requestedData['token'])){
+	$receivedToken = $requestedData['token'];
 }
-if(!isset($_REQUEST['token']) || empty($_REQUEST['token'])){
+if(!isset($requestedData['token']) || empty($requestedData['token'])){
 	$returnData['error'] = true;
 	$returnData['msg'] = "Token is missing , Authentication Failed!";
 	echo json_encode($returnData);
