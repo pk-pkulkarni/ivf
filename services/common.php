@@ -12,6 +12,7 @@ If token matches then application will call required service else it will throw 
 $returnData = [];
 global $conn;
 $receivedToken = "";
+$requestedData = (json_decode(file_get_contents("php://input"),true));
 if(isset($_REQUEST['token'])){
 	$receivedToken = $_REQUEST['token'];
 }

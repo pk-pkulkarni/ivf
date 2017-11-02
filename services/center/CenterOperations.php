@@ -4,7 +4,7 @@ include ("../config.php");
 include ("../common.php");
 
 
-$data = ($_REQUEST);
+$data = (json_decode(file_get_contents("php://input"),true));
 $operation = "";
 if(isset($data['operation'])){
 	$operation = $data['operation'];
