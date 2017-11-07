@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 30, 2017 at 10:26 AM
+-- Generation Time: Nov 07, 2017 at 11:58 AM
 -- Server version: 10.1.13-MariaDB
 -- PHP Version: 7.0.8
 
@@ -47,6 +47,39 @@ CREATE TABLE `doctor` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `patient`
+--
+
+CREATE TABLE `patient` (
+  `patient_id` int(11) NOT NULL,
+  `wife_name` varchar(500) NOT NULL,
+  `wife_blood_group` varchar(50) NOT NULL,
+  `wife_height` decimal(4,2) NOT NULL,
+  `wife_weight` int(11) NOT NULL,
+  `wife_age` int(11) NOT NULL,
+  `wife_dob` date NOT NULL,
+  `wife_phone` varchar(255) NOT NULL,
+  `wife_email` varchar(255) NOT NULL,
+  `wife_bmi` int(11) NOT NULL,
+  `husband_name` varchar(500) NOT NULL,
+  `husband_blood_group` varchar(50) NOT NULL,
+  `husband_height` decimal(4,2) NOT NULL,
+  `husband_weight` int(11) NOT NULL,
+  `husband_age` int(11) NOT NULL,
+  `husband_dob` date NOT NULL,
+  `husband_phone` varchar(255) NOT NULL,
+  `husband_email` varchar(255) NOT NULL,
+  `husband_bmi` int(11) NOT NULL,
+  `address` text NOT NULL,
+  `marridge_date` date NOT NULL,
+  `marridge_since` date NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` date NOT NULL DEFAULT '0000-00-00'
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `role`
 --
 
@@ -82,7 +115,8 @@ CREATE TABLE `user` (
   `password` text NOT NULL,
   `center_id` int(11) NOT NULL,
   `role_id` int(11) NOT NULL,
-  `status_id` int(11) NOT NULL DEFAULT '1'
+  `status_id` int(11) NOT NULL DEFAULT '1',
+  `token` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -100,6 +134,12 @@ ALTER TABLE `center`
 --
 ALTER TABLE `doctor`
   ADD PRIMARY KEY (`doctor_id`);
+
+--
+-- Indexes for table `patient`
+--
+ALTER TABLE `patient`
+  ADD PRIMARY KEY (`patient_id`);
 
 --
 -- Indexes for table `role`
@@ -128,19 +168,20 @@ ALTER TABLE `center`
 ALTER TABLE `doctor`
   MODIFY `doctor_id` int(11) NOT NULL AUTO_INCREMENT;
 --
+-- AUTO_INCREMENT for table `patient`
+--
+ALTER TABLE `patient`
+  MODIFY `patient_id` int(11) NOT NULL AUTO_INCREMENT;
+--
 -- AUTO_INCREMENT for table `role`
 --
 ALTER TABLE `role`
-  MODIFY `role_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `role_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT;
-  
-ALTER TABLE `user` ADD `token` TEXT NOT NULL AFTER `status_id`;  
-  
-  
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
