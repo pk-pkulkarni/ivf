@@ -10,6 +10,14 @@
 					return $ocLazyLoad.load(['js/controllers/people/patientDetails.js']);
 				}]
 			}
+		}).when("/login", {
+			templateUrl: "templates/Login/login.html",
+			controller: "loginCtrl",
+			resolve: {
+				loadAsset: ['$ocLazyLoad', function($ocLazyLoad){
+					return $ocLazyLoad.load(['js/controllers/Login/loginCtrl.js']);
+				}]
+			}
 		}).when("/harmones", {
 			templateUrl: "templates/people/harmones.html",
 			controller: "addPersonCtrl",
