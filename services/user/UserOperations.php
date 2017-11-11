@@ -40,13 +40,31 @@ function add($data){
 	$status_id = 1; // 1 is for Active
 	
 	$result = array();
+	
+	$sqlu = "select * from user where email = '$email'";
+
+	$rowsu = $conn->query($sqlu);
+						
+	$resultu = [];
+	while($resu = mysqli_fetch_assoc($rowsu)) {		        
+		$resultu[] = $resu;	
+	}
+	if(count($resultu) > 0){
+		$result['error'] = true;
+		$result['msg'] = "User with this email is already exist";
+		echo json_encode($result);
+		exit;
+	}
+	
 
 	$sql = "insert into user(firstname,lastname,email,contact,password,center_id,role_id,status_id) values ('$firstname','$lastname','$email','$contact','$password','$center_id','$role_id','$status_id')";
 
 	if(mysqli_query($conn, $sql)){
-		$result['success'] = "Record is Created Successfully";
+		$result['success'] = true;
+		$result['msg'] = "Record is Created Successfully";
 	} else{
-		$result['error'] = "ERROR: Could not able to execute $sql. " . mysqli_error($conn);
+		$result['error'] = true;
+		$result['msg'] = "ERROR: Could not able to execute $sql. " . mysqli_error($conn);
 	}
 
 	echo json_encode($result);
@@ -67,9 +85,11 @@ function update($data){
 	$sql = "update user set firstname = '$firstname',lastname = '$lastname',contact = $contact,center_id = $center_id,role_id = $role_id where user_id = $user_id";
 
 	if(mysqli_query($conn, $sql)){
-		$result['success'] = "Record is Updated Successfully";
+		$result['success'] = true;
+		$result['msg'] = "Record is Updated Successfully";
 	} else{
-		$result['error'] = "ERROR: Could not able to execute $sql. " . mysqli_error($conn);
+		$result['error'] = true;
+		$result['msg'] = "ERROR: Could not able to execute $sql. " . mysqli_error($conn);
 	}
 
 	echo json_encode($result);
