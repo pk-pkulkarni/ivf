@@ -1,16 +1,25 @@
 <?php
 include ("../config.php");
-include ("../common.php");
+//include ("../common.php");
 
 //mysqli_real_escape_string =  Escapes special characters in a string for use in an SQL statement.
 
-$firstname = mysqli_real_escape_string($conn, $_REQUEST['firstname']);
+/*$firstname = mysqli_real_escape_string($conn, $_REQUEST['firstname']);
 $lastname = mysqli_real_escape_string($conn, $_REQUEST['lastname']);
 $email = $_REQUEST['email'];
 $contact =  $_REQUEST['contact'];
 $password = $_REQUEST['password'];
 $center_id = $_REQUEST['center_id'];
-$role_id = $_REQUEST['role_id'];
+$role_id = $_REQUEST['role_id'];*/
+
+$firstname = "Sagar";
+$lastname = "Unkule";
+$email = "unkule.sagar@gmail.com";
+$contact =  "9422241451";
+$password = "Sagar@123";
+$center_id = "1";
+$role_id = "1";
+
 
 $result = array();
 
