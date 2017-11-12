@@ -1,4 +1,4 @@
-loginApp.controller("loginCtrl", ["$scope", "loginService", "$cookies", "$q", function ($scope, loginService, $cookies, $q) {			
+ivfApp.controller("loginCtrl", ["$scope", "loginService", "$cookies", "$q", "$window", function ($scope, loginService, $cookies, $q, $window) {			
 	$scope.login = function(){
 		validateLoginDetails().then(function(str){
 			if (str.length > 0) {
@@ -40,7 +40,8 @@ loginApp.controller("loginCtrl", ["$scope", "loginService", "$cookies", "$q", fu
 		loginService.authenticateUser(loginDetails).then(function(data){
 			console.log(data);
 	        if (data.success) {
-	        	$cookies.put('token', data.token);	        	
+	        	$cookies.put('token', data.token);
+	        	$window.location.href = '/ivf/#!/centerDetails';	        	
 	        }else if (data.error) {
 	        	$scope.errorMessage = data.msg;
 	        	$scope.error = true;
@@ -51,7 +52,7 @@ loginApp.controller("loginCtrl", ["$scope", "loginService", "$cookies", "$q", fu
 }]);
 
 
-loginApp.factory("loginService",["$http", '$q', "baseSvc", function($http, $q, baseSvc){
+ivfApp.factory("loginService",["$http", '$q', "baseSvc", function($http, $q, baseSvc){
 
 	var authenticateUser = function(loginDetails){
 		var url = "services/auth/auth.php";

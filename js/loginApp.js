@@ -1,2 +1,2 @@
-var loginApp = angular.module("loginApp", ['ngCookies']);
+var ivfApp = angular.module("ivfApp", ['ngCookies']);
 

@@ -1,21 +1,23 @@
-"use strict";
-(function () {
-	angular.module("peopleApp", ["ngRoute", "oc.lazyLoad"])
+
+var ivfApp = angular.module("ivfApp", ["ngRoute", "oc.lazyLoad", "ngCookies", "ui.grid"])
 		.config(["$routeProvider", function ($routeProvider) {
-		$routeProvider.when("/", {
-			templateUrl: "templates/people/patientDetails.html",
-			controller: "allPeopleCtrl",
+		$routeProvider.when("/centerDetails", {
+			templateUrl: "templates/center/centerDetails.html",
+			controller: "centerCtrl",
 			resolve: {
 				loadAsset: ['$ocLazyLoad', function($ocLazyLoad){
-					return $ocLazyLoad.load(['js/controllers/people/patientDetails.js']);
+					return $ocLazyLoad.load([
+						'lib/ui-grid/ui-grid.min.js',
+						'js/controllers/center/centerCtrl.js'						
+					]);
 				}]
 			}
-		}).when("/login", {
-			templateUrl: "templates/Login/login.html",
-			controller: "loginCtrl",
+		}).when("/centerAdd", {
+			templateUrl: "templates/center/centerAdd.html",
+			controller: "centerCtrl",
 			resolve: {
 				loadAsset: ['$ocLazyLoad', function($ocLazyLoad){
-					return $ocLazyLoad.load(['js/controllers/Login/loginCtrl.js']);
+					return $ocLazyLoad.load(['js/controllers/center/centerCtrl.js']);
 				}]
 			}
 		}).when("/harmones", {
@@ -86,4 +88,3 @@
 			}
 		});
 	}]);
-})();

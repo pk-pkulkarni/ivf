@@ -29,9 +29,9 @@ function add($data){
 	global $conn;
 	//mysqli_real_escape_string =  Escapes special characters in a string for use in an SQL statement.
 
-	$center_name = mysqli_real_escape_string($conn, $_REQUEST['center_name']);
-	$center_address = $_REQUEST['center_address'];
-	$doctor_id = (int)$_REQUEST['doctor_id'];
+	$center_name = mysqli_real_escape_string($conn, $data['center_name']);
+	$center_address = $data['center_address'];
+	$doctor_id = (int)$data['doctor_id'];
 	
 	$result = array();
 
@@ -48,10 +48,10 @@ function add($data){
 
 function update($data){
 	global $conn;
-	$center_name = mysqli_real_escape_string($conn, $_REQUEST['center_name']);
-	$center_address = $_REQUEST['center_address'];
-	$doctor_id = (int)$_REQUEST['doctor_id'];
-	$center_id = (int)$_REQUEST['center_id'];
+	$center_name = mysqli_real_escape_string($conn, $data['center_name']);
+	$center_address = $data['center_address'];
+	$doctor_id = (int)$data['doctor_id'];
+	$center_id = (int)$data['center_id'];
 	
 	$result = array();
 
