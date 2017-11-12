@@ -6,8 +6,7 @@ var ivfApp = angular.module("ivfApp", ["ngRoute", "oc.lazyLoad", "ngCookies", "u
 			controller: "centerCtrl",
 			resolve: {
 				loadAsset: ['$ocLazyLoad', function($ocLazyLoad){
-					return $ocLazyLoad.load([
-						'lib/ui-grid/ui-grid.min.js',
+					return $ocLazyLoad.load([						
 						'js/controllers/center/centerCtrl.js'						
 					]);
 				}]
