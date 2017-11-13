@@ -65,9 +65,18 @@ if(count($result) > 0){
 		$sqlUpdate = "update user set token = '$token' where user_id = $user_id";
 		$updatedRow = $conn->query($sqlUpdate);
 		
+		$sqlGet = "select u.*,r.name as role_name,c.center_name from user u join role r on r.role_id = u.role_id join center c on c.center_id = u.center_id where u.user_id = $user_id";
+
+		$rowsGet = $conn->query($sqlGet);
+							
+		$resultGet = [];
+		while($resGet = mysqli_fetch_assoc($rowsGet)) {		        
+			$resultGet[] = $resGet;	
+		}
 		
 		$returnData['success'] = true;
 		$returnData['token'] = $token;
+		$returnData['data'] = $resultGet;
 		$returnData['msg'] = "User is authenticated";
 	}
 	else{
