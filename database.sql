@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 07, 2017 at 11:58 AM
+-- Generation Time: Nov 13, 2017 at 09:52 AM
 -- Server version: 10.1.13-MariaDB
 -- PHP Version: 7.0.8
 
@@ -74,7 +74,22 @@ CREATE TABLE `patient` (
   `marridge_date` date NOT NULL,
   `marridge_since` date NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `updated_at` date NOT NULL DEFAULT '0000-00-00'
+  `updated_at` date NOT NULL DEFAULT '0000-00-00',
+  `updated_by` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `process`
+--
+
+CREATE TABLE `process` (
+  `process_id` int(11) NOT NULL,
+  `process_name` varchar(255) NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` date NOT NULL DEFAULT '0000-00-00',
+  `updated_by` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -116,7 +131,27 @@ CREATE TABLE `user` (
   `center_id` int(11) NOT NULL,
   `role_id` int(11) NOT NULL,
   `status_id` int(11) NOT NULL DEFAULT '1',
-  `token` text NOT NULL
+  `token` text NOT NULL,
+  `is_doctor` enum('Y','N') NOT NULL DEFAULT 'N',
+  `is_embryologist` enum('Y','N') NOT NULL DEFAULT 'N'
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `user_to_process`
+--
+
+CREATE TABLE `user_to_process` (
+  `user_to_process_id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `process_id` int(11) NOT NULL,
+  `weight` decimal(4,2) NOT NULL,
+  `embryologist_id` int(11) NOT NULL,
+  `batch_no` varchar(100) NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` date NOT NULL DEFAULT '0000-00-00',
+  `updated_by` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -142,6 +177,12 @@ ALTER TABLE `patient`
   ADD PRIMARY KEY (`patient_id`);
 
 --
+-- Indexes for table `process`
+--
+ALTER TABLE `process`
+  ADD PRIMARY KEY (`process_id`);
+
+--
 -- Indexes for table `role`
 --
 ALTER TABLE `role`
@@ -154,6 +195,12 @@ ALTER TABLE `user`
   ADD PRIMARY KEY (`user_id`);
 
 --
+-- Indexes for table `user_to_process`
+--
+ALTER TABLE `user_to_process`
+  ADD PRIMARY KEY (`user_to_process_id`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -161,7 +208,7 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `center`
 --
 ALTER TABLE `center`
-  MODIFY `center_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `center_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT for table `doctor`
 --
@@ -173,15 +220,25 @@ ALTER TABLE `doctor`
 ALTER TABLE `patient`
   MODIFY `patient_id` int(11) NOT NULL AUTO_INCREMENT;
 --
+-- AUTO_INCREMENT for table `process`
+--
+ALTER TABLE `process`
+  MODIFY `process_id` int(11) NOT NULL AUTO_INCREMENT;
+--
 -- AUTO_INCREMENT for table `role`
 --
 ALTER TABLE `role`
-  MODIFY `role_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `role_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
   MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+--
+-- AUTO_INCREMENT for table `user_to_process`
+--
+ALTER TABLE `user_to_process`
+  MODIFY `user_to_process_id` int(11) NOT NULL AUTO_INCREMENT;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
