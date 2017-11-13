@@ -55,9 +55,11 @@ function add($data){
 	$sql = "insert into patient(wife_name,wife_blood_group,wife_height,wife_weight,wife_age,wife_dob,wife_phone,wife_email,wife_bmi,husband_name,husband_blood_group,husband_height,husband_weight,husband_age,husband_dob,husband_phone,husband_email,husband_bmi,address,marridge_date,marridge_since) values ('$wife_name','$wife_blood_group',$wife_height,$wife_weight,$wife_age,'$wife_dob','$wife_phone','$wife_email',$wife_bmi,'$husband_name','$husband_blood_group',$husband_height,$husband_weight,$husband_age,'$husband_dob','$husband_phone','$husband_email',$husband_bmi,$address,$marridge_date,$marridge_since)";
 
 	if(mysqli_query($conn, $sql)){
-		$result['success'] = "Record is Created Successfully";
+		$result['success'] = true;
+		$result['msg'] = "Record is Created Successfully";
 	} else{
-		$result['error'] = "ERROR: Could not able to execute $sql. " . mysqli_error($conn);
+		$result['error'] = true;
+		$result['msg'] = "ERROR: Could not able to execute $sql. " . mysqli_error($conn);
 	}
 
 	echo json_encode($result);
@@ -94,9 +96,11 @@ function update($data){
 	$sql = "update patient set wife_name = '$wife_name',wife_blood_group = '$wife_blood_group',wife_height = $wife_height,wife_weight = $wife_weight,wife_age = $wife_age,wife_dob = '$wife_dob',wife_phone = '$wife_phone',wife_email = '$wife_email',wife_bmi = $wife_bmi,husband_name = '$husband_name',husband_blood_group = '$husband_blood_group',husband_height = $husband_height,husband_weight = $husband_weight,husband_age = $husband_age,husband_dob = '$husband_dob',husband_phone = '$husband_phone',husband_email = '$husband_email',husband_bmi = $husband_bmi,address = '$address',marridge_date = '$marridge_date',marridge_since = '$marridge_since' where patient_id = $patient_id";
 
 	if(mysqli_query($conn, $sql)){
-		$result['success'] = "Record is Updated Successfully";
+		$result['success'] = true;
+		$result['msg'] = "Record is Updated Successfully";
 	} else{
-		$result['error'] = "ERROR: Could not able to execute $sql. " . mysqli_error($conn);
+		$result['error'] = true;
+		$result['msg'] = "ERROR: Could not able to execute $sql. " . mysqli_error($conn);
 	}
 
 	echo json_encode($result);
@@ -109,11 +113,14 @@ function get($data){
 	$rows = $conn->query($sql);
 						
 	$result = [];
+	$resultData = array();
 	while($res = mysqli_fetch_assoc($rows)) {		        
 		$result[] = $res;	
 	}
 
-	echo json_encode($result);
+	$resultData['success'] = true;
+	$resultData['data'] = $result;
+	echo json_encode($resultData);
 }
 
 

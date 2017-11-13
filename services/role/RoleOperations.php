@@ -50,9 +50,12 @@ function get($data){
 	$rows = $conn->query($sql);
 						
 	$result = [];
+	$resultData = array();
 	while($res = mysqli_fetch_assoc($rows)) {		        
 		$result[] = $res;	
 	}
 
-	echo json_encode($result);
+	$resultData['success'] = true;
+	$resultData['data'] = $result;
+	echo json_encode($resultData);
 }

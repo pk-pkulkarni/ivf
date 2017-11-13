@@ -38,9 +38,11 @@ function add($data){
 	$sql = "insert into center(center_name,center_address,doctor_id) values ('$center_name','$center_address','$doctor_id')";
 
 	if(mysqli_query($conn, $sql)){
-		$result['success'] = "Record is Created Successfully";
+		$result['success'] = true;
+		$result['msg'] = "Record is Created Successfully";
 	} else{
-		$result['error'] = "ERROR: Could not able to execute $sql. " . mysqli_error($conn);
+		$result['error'] = true;
+		$result['msg'] = "ERROR: Could not able to execute $sql. " . mysqli_error($conn);
 	}
 
 	echo json_encode($result);
@@ -58,9 +60,11 @@ function update($data){
 	$sql = "update center set center_name='$center_name',center_address='$center_address',doctor_id = $doctor_id where center_id = $center_id";
 
 	if(mysqli_query($conn, $sql)){
-		$result['success'] = "Record is Updated Successfully";
+		$result['success'] = true;
+		$result['msg'] = "Record is Updated Successfully";
 	} else{
-		$result['error'] = "ERROR: Could not able to execute $sql. " . mysqli_error($conn);
+		$result['error'] = true;
+		$result['msg'] = "ERROR: Could not able to execute $sql. " . mysqli_error($conn);
 	}
 
 	echo json_encode($result);
@@ -73,11 +77,14 @@ function get($data){
 	$rows = $conn->query($sql);
 						
 	$result = [];
+	$resultData = array();
 	while($res = mysqli_fetch_assoc($rows)) {		        
 		$result[] = $res;	
 	}
 
-	echo json_encode($result);
+	$resultData['success'] = true;
+	$resultData['data'] = $result;
+	echo json_encode($resultData);
 }
 
 
