@@ -38,6 +38,14 @@ function add($data){
 	$center_id = $data['center_id'];
 	$role_id = $data['role_id'];
 	$status_id = 1; // 1 is for Active
+	$is_doctor = 'N';
+	$is_embryologist = 'N';
+	if(isset($data['is_doctor'])){
+		$is_doctor = $data['is_doctor'];
+	}
+	if(isset($data['is_embryologist'])){
+		$is_embryologist = $data['is_embryologist'];
+	}
 	
 	$result = array();
 	
@@ -57,7 +65,7 @@ function add($data){
 	}
 	
 
-	$sql = "insert into user(firstname,lastname,email,contact,password,center_id,role_id,status_id) values ('$firstname','$lastname','$email','$contact','$password','$center_id','$role_id','$status_id')";
+	$sql = "insert into user(firstname,lastname,email,contact,password,center_id,role_id,status_id,token,is_doctor,is_embryologist) values ('$firstname','$lastname','$email','$contact','$password','$center_id','$role_id','$status_id','','$is_doctor','$is_embryologist')";
 
 	if(mysqli_query($conn, $sql)){
 		$result['success'] = true;
