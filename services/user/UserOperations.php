@@ -3,9 +3,9 @@
 include ("../config.php");
 include ("../common.php");
 
-
-
 $data = (json_decode(file_get_contents("php://input"),true)); // Data will come in JSON format from angular
+//$data = $_REQUEST;
+
 $operation = "";
 if(isset($data['operation'])){
 	$operation = $data['operation'];
@@ -13,7 +13,7 @@ if(isset($data['operation'])){
 
 switch ($operation) {
 	case "add":
-        add($data);
+		add($data);
         break;
     case "update":
         update($data);
@@ -29,7 +29,18 @@ switch ($operation) {
 function add($data){
 	global $conn;
 	global $key;
-	$encryptedPass = base64_encode($key.$data['password']);
+	//Generate Random key as a password
+	$str = "";
+	$characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+	$charactersLength = strlen($characters);
+	$length = 8;
+	for ($i = 0; $i < $length; $i++) {
+		$str .= $characters[rand(0, $charactersLength - 1)];
+	}
+	// Random key/password generation ends//
+	
+	//$encryptedPass = base64_encode($key.$data['password']);
+	$encryptedPass = base64_encode($key.$str);
 	$firstname = mysqli_real_escape_string($conn, $data['firstname']);
 	$lastname = mysqli_real_escape_string($conn, $data['lastname']);
 	$email = $data['email'];
@@ -68,6 +79,20 @@ function add($data){
 	$sql = "insert into user(firstname,lastname,email,contact,password,center_id,role_id,status_id,token,is_doctor,is_embryologist) values ('$firstname','$lastname','$email','$contact','$password','$center_id','$role_id','$status_id','','$is_doctor','$is_embryologist')";
 
 	if(mysqli_query($conn, $sql)){
+		// Send email to user who is just added
+		$to = $email; // Enter email id which is taken as input
+		$subject = "Your acoount with this email is created in IVF";
+		$txt = "Your Password is ".$str;
+		$headers = "From: ivf@noReply.com" . "\r\n";
+
+		$retval = mail($to,$subject,$txt,$headers);
+		if( $retval == true ) {
+			//
+		}else {
+			$result['success'] = true;
+			$result['msg'] = "Record is Created Successfully but Mail is not sent to the user!";
+		}
+		//
 		$result['success'] = true;
 		$result['msg'] = "Record is Created Successfully";
 	} else{
