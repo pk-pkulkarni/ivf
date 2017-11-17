@@ -1,16 +1,37 @@
 "use strict";
 (function () {
 	angular.module("ivfApp")
-		.controller("centerCtrl", ["$scope", "centerService", "$cookies", "$q", "$location", function ($scope, centerService, $cookies, $q, $location) {			
+		.controller("centerCtrl", ["$scope", "centerService", "$cookies", "$q", "$location", "$routeParams", function ($scope, centerService, $cookies, $q, $location, $routeParams) {			
+			$scope.center = [];
 			$scope.init = function(){
 				loadCenters();
 			};
 
 			$scope.centerGrid = {
 			    enableSorting: true,
-			    columnDefs: [
-			      { field: 'Name'},
-			      { field: 'Address'}
+			    enablePaginationControls: true,
+            	paginationPageSize: 10,
+			    columnDefs: [{
+                    name: 'Name',                    
+                    width: '40%',
+                    cellTemplate: '<div style="padding-left: 10px;margin-left:5px;">' + '{{row.entity.Name}}' + '</div>'
+                },
+                {
+                    name: 'Address',                    
+                    width: '45%',
+                    cellTemplate: '<div style="padding-left: 10px;">' + '{{row.entity.Address}}' + '</div>'
+                },
+                {
+                    name: 'Action',                    
+                    width: '15%',
+                    cellTemplate: '<div style="padding-left: 10px;"><div class="btn-group">' +
+                  		'<button type="button" class="btn btn-default btn-sm"><i class="fa fa-edit" ng-click="grid.appScope.editCenter(row.entity.Id);"></i></button>' +
+                  		'<button type="button" class="btn btn-default btn-sm"><i class="fa fa-reorder" ng-click="grid.appScope.ViewCenter(row.entity.Id);"></i></button>' +
+                  		'<button type="button" class="btn btn-default btn-sm"><i class="fa fa-trash-o" ng-click="grid.appScope.deleteCenter(row.entity.Id);"></i></button></div></div>'
+                }
+			      /*{ field: 'Name'},
+			      { field: 'Address'},
+			      { field: 'Action'}*/
 			    ],
 			    onRegisterApi: function( gridApi ) {
 			      $scope.gridApi = gridApi;
@@ -27,7 +48,7 @@
 				}
 				centerService.centerOperations(operation).then(function(data){
 					console.log(data);					
-					$scope.centerGrid.data = arrangeData(data);
+					$scope.centerGrid.data = arrangeData(data.data);
 				})	
 			};
 
@@ -42,14 +63,68 @@
 				return centerData;
 			};
 
-			$scope.addCenter = function(){
-				$scope.center['operation'] = 'add';
+			$scope.addUpdateCenter = function(){
+				validateCenter().then(function(str){
+					if (str.length > 0) {
+						$scope.errorMessage = str;
+						$scope.error = true;
+					}else{
+						saveCenterDetails();
+					}
+				});				
+			};
+
+			var validateCenter = function(){
+				var deferred = $q.defer();
+				if($scope.center.center_name == undefined || $scope.center.center_name == ""){
+					deferred.resolve("Please enter Center Name");	
+				}else if ($scope.center.center_address == undefined || $scope.center.center_address == "") {
+					deferred.resolve("Please enter center address");		
+				}else{
+					deferred.resolve("");	
+				}		
+				return deferred.promise;
+			};
+
+			var saveCenterDetails = function(){
+				if ($routeParams.Id) {					
+					$scope.center['Id'] = $routeParams.Id;
+					$scope.center['operation'] = 'update';
+				}else{
+					$scope.center['operation'] = 'add';	
+				}				
 				$scope.center['token'] = $cookies.get('token');
 				centerService.centerOperations($scope.center).then(function(data){
 					console.log(data)
-					$location.path("/centerDetails");
+					if(data.success == true)
+						$location.path("/centerDetails");
+					else if (data.error == true) {
+
+					}
 				});
-			};		    
+			};
+
+			$scope.ViewCenter = function(){
+				var operation = {
+					'operation' : 'getById',
+					'token' : $cookies.get('token'),
+					'Id' : $routeParams.Id
+				}
+				centerService.centerOperations(operation).then(function(data){
+					console.log(data);		
+					if(data.success == true)			
+						$scope.center = data.data;
+					else if (data.error = true) {
+
+					}
+				})
+			};
+
+			$scope.ViewCenterGrid = function(){
+				$location.path("/centerDetails");
+			}
+
+
 		}]);
 })();
 
