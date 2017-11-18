@@ -21,6 +21,9 @@ switch ($operation) {
 	case "delete":
         deactivate($data);
         break;
+	case "getById":
+		getById($data);
+		break;	
 	default:
         get($data);
 }
@@ -126,6 +129,29 @@ function update($data){
 	}
 
 	echo json_encode($result);
+}
+
+function getById($data){
+	global $conn;
+	$id = (int)$data['user_id'];
+	$sql = "select * from user where user_id = $id";
+
+	$rows = $conn->query($sql);
+						
+	$result = [];
+	$resultData = array();
+	while($res = mysqli_fetch_assoc($rows)) {		        
+		$result[] = $res;	
+	}
+	if(count($result) > 0){
+		$resultData['success'] = true;
+		$resultData['data'] = $result;
+	}
+	else{
+		$result['error'] = true;
+		$result['msg'] = "No data found";
+	}
+	echo json_encode($resultData);
 }
 
 function get($data){
