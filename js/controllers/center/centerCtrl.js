@@ -25,8 +25,8 @@
                     name: 'Action',                    
                     width: '15%',
                     cellTemplate: '<div style="padding-left: 10px;"><div class="btn-group">' +
-                  		'<button type="button" class="btn btn-default btn-sm"><i class="fa fa-edit" ng-click="grid.appScope.editCenter(row.entity.Id);"></i></button>' +
-                  		'<button type="button" class="btn btn-default btn-sm"><i class="fa fa-reorder" ng-click="grid.appScope.ViewCenter(row.entity.Id);"></i></button>' +
+                  		'<a type="button" class="btn btn-default btn-sm" href="#!/centerEdit/{{row.entity.Id}}"><i class="fa fa-edit"></i></a>' +
+                  		'<a type="button" class="btn btn-default btn-sm" href="#!/centerView/{{row.entity.Id}}"><i class="fa fa-reorder"></i></a>' +
                   		'<button type="button" class="btn btn-default btn-sm"><i class="fa fa-trash-o" ng-click="grid.appScope.deleteCenter(row.entity.Id);"></i></button></div></div>'
                 }
 			      /*{ field: 'Name'},
@@ -108,16 +108,32 @@
 				var operation = {
 					'operation' : 'getById',
 					'token' : $cookies.get('token'),
-					'Id' : $routeParams.Id
+					'center_id' : $routeParams.Id
 				}
 				centerService.centerOperations(operation).then(function(data){
 					console.log(data);		
 					if(data.success == true)			
-						$scope.center = data.data;
+						$scope.center = data.data[0];
 					else if (data.error = true) {
 
 					}
 				})
+			};
+
+			$scope.deleteCenter = function(Id){
+				var operation = {
+					'operation' : 'delete',
+					'token' : $cookies.get('token'),
+					'center_id' : Id
+				}
+				centerService.centerOperations(operation).then(function(data){
+					console.log(data);		
+					if(data.success == true)			
+						$scope.center = data.data[0];
+					else if (data.error = true) {
+
+					}
+				})	
 			};
 
 			$scope.ViewCenterGrid = function(){

@@ -1,0 +1,36 @@
+<div class="box box-info" ng-controller="userCtrl" ng-init=viewUser()>
+	<div class="box-header with-border">
+	  <h3 class="box-title">User Details</h3>
+	</div>
+	<!-- /.box-header -->
+	<!-- form start -->
+	<div class="box-body">
+        <div class="row">
+			<div class="col-md-6 form-horizontal">			    
+			    <div class="box-body">
+			        <div class="form-group">
+			          <label class="col-md-4 control-label">Center Name</label>
+
+			          <div class="col-md-8">
+			            {{user.firstname}}
+			          </div>
+			        </div>
+			        <div class="form-group">
+			          <label class="col-md-4 control-label">Address</label>
+
+			          <div class="col-md-8">
+			            {{user.lastname}}
+			          </div>
+			        </div>			        
+			        <div class="form-group">
+			          <label class="col-md-4 control-label"></label>
+
+			          <div class="col-md-8">
+			            <a href="#!/userDetails" class="btn btn-info" >Back</a>	
+			          </div>
+			        </div>
+			    </div>	    
+			</div>			
+		</div>
+	</div>
+</div>

@@ -39,5 +39,43 @@ var ivfApp = angular.module("ivfApp", ["ngRoute", "oc.lazyLoad", "ngCookies", "u
 					return $ocLazyLoad.load(['js/controllers/center/centerCtrl.js']);
 				}]
 			}
+		})
+		.when("/userDetails", {
+			templateUrl: "templates/user/userDetails.html",
+			controller: "userCtrl",
+			resolve: {
+				loadAsset: ['$ocLazyLoad', function($ocLazyLoad){
+					return $ocLazyLoad.load([						
+						'js/controllers/user/userCtrl.js'						
+					]);
+				}]
+			}
+		})
+		.when("/userAdd", {
+			templateUrl: "templates/user/userAdd.html",
+			controller: "userCtrl",
+			resolve: {
+				loadAsset: ['$ocLazyLoad', function($ocLazyLoad){
+					return $ocLazyLoad.load(['js/controllers/user/userCtrl.js']);
+				}]
+			}
+		})		
+		.when("/userView/:Id", {
+			templateUrl: "templates/user/userView.html",
+			controller: "userCtrl",
+			resolve: {
+				loadAsset: ['$ocLazyLoad', function($ocLazyLoad){
+					return $ocLazyLoad.load(['js/controllers/user/userCtrl.js']);
+				}]
+			}
+		})
+		.when("/userEdit/:Id", {
+			templateUrl: "templates/user/userEdit.html",
+			controller: "userCtrl",
+			resolve: {
+				loadAsset: ['$ocLazyLoad', function($ocLazyLoad){
+					return $ocLazyLoad.load(['js/controllers/user/userCtrl.js']);
+				}]
+			}
 		});
 	}]);
