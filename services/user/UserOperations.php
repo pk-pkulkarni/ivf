@@ -134,7 +134,7 @@ function update($data){
 function getById($data){
 	global $conn;
 	$id = (int)$data['user_id'];
-	$sql = "select * from user where user_id = $id";
+	$sql = "SELECT u.*, r.name as role_name ,c.center_name FROM user u LEFT JOIN role r on u.role_id = r.role_id LEFT JOIN center c on u.center_id = c.center_id where u.user_id = $id";
 
 	$rows = $conn->query($sql);
 						
@@ -156,7 +156,7 @@ function getById($data){
 
 function get($data){
 	global $conn;
-	$sql = "select * from user";
+	$sql = "SELECT u.*, r.name as role_name ,c.center_name FROM user u LEFT JOIN role r on u.role_id = r.role_id LEFT JOIN center c on u.center_id = c.center_id";
 
 	$rows = $conn->query($sql);
 						
