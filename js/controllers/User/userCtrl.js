@@ -21,6 +21,16 @@
                     width: '45%',
                     cellTemplate: '<div style="padding-left: 10px;">' + '{{row.entity.LastName}}' + '</div>'
                 },
+				{
+                    name: 'Email',                    
+                    width: '45%',
+                    cellTemplate: '<div style="padding-left: 10px;">' + '{{row.entity.Email}}' + '</div>'
+                },
+				{
+                    name: 'Contact Number',                    
+                    width: '45%',
+                    cellTemplate: '<div style="padding-left: 10px;">' + '{{row.entity.Contact}}' + '</div>'
+                },
                 {
                     name: 'Action',                    
                     width: '15%',
