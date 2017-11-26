@@ -1,6 +1,6 @@
-<div class="box box-info" ng-controller="userCtrl">
+<div class="box box-info" ng-controller="userCtrl" >
 	<div class="box-header with-border">
-	  <h3 class="box-title">Add Center</h3>
+	  <h3 class="box-title">Add User</h3>
 	</div>
 	<!-- /.box-header -->
 	<!-- form start -->
@@ -15,31 +15,45 @@
 			          </div>
 			        </div>
 			        <div class="form-group">
-			          <label class="col-md-4 control-label">Center Name</label>
+			          <label class="col-md-4 control-label">First Name</label>
 
 			          <div class="col-md-8">
-			            <input type="text" class="form-control" placeholder="Center Name" ng-model="center.center_name">
+			            <input type="text" class="form-control" placeholder="First Name" ng-model="user.firstname">
 			          </div>
 			        </div>
-			        <div class="form-group">
-			          <label class="col-md-4 control-label">Address</label>
+					<div class="form-group">
+			          <label class="col-md-4 control-label">Last Name</label>
 
 			          <div class="col-md-8">
-			            <textarea class="form-control" placeholder="Address" ng-model="center.center_address" rows="4"></textarea> 
+			            <input type="text" class="form-control" placeholder="Last Name" ng-model="user.lastname">
 			          </div>
 			        </div>
-			        <div class="form-group">
-			          <label class="col-md-4 control-label">Doctor</label>
+			       <div class="form-group">
+			          <label class="col-md-4 control-label">Email</label>
 
 			          <div class="col-md-8">
-			            <input type="text" class="form-control" placeholder="Doctor" ng-model="center.doctor_id">
+			            <input type="text" class="form-control" placeholder="Email" ng-model="user.email">
+			          </div>
+			        </div>	
+                    <div class="form-group">
+			          <label class="col-md-4 control-label">Contact Number</label>
+
+			          <div class="col-md-8">
+			            <input type="text" class="form-control" placeholder="Contact Number" ng-model="user.contact">
 			          </div>
 			        </div>
+					<div class="form-group">
+			          <label class="col-md-4 control-label">Password</label>
+
+			          <div class="col-md-8">
+			            <input type="text" class="form-control" placeholder="Contact Number" ng-model="user.password">
+			          </div>
+			        </div>					
 			        <div class="form-group">
 			          <label class="col-md-4 control-label"></label>
 
 			          <div class="col-md-8">
-			            <a href="" class="btn btn-info" ng-click="addUpdateCenter()">add</a>	
+			            <a href="" class="btn btn-info" ng-click="addUpdateUser()">add</a>	
 			          </div>
 			        </div>
 			    </div>	    

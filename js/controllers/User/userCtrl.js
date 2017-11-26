@@ -13,23 +13,28 @@
             	paginationPageSize: 10,
 			    columnDefs: [{
                     name: 'First Name',                    
-                    width: '40%',
+                    width: '20%',
                     cellTemplate: '<div style="padding-left: 10px;margin-left:5px;">' + '{{row.entity.FirstName}}' + '</div>'
                 },
                 {
                     name: 'Last Name',                    
-                    width: '45%',
+                    width: '20%',
                     cellTemplate: '<div style="padding-left: 10px;">' + '{{row.entity.LastName}}' + '</div>'
                 },
 				{
                     name: 'Email',                    
-                    width: '45%',
+                    width: '35%',
                     cellTemplate: '<div style="padding-left: 10px;">' + '{{row.entity.Email}}' + '</div>'
                 },
 				{
                     name: 'Contact Number',                    
-                    width: '45%',
+                    width: '20%',
                     cellTemplate: '<div style="padding-left: 10px;">' + '{{row.entity.Contact}}' + '</div>'
+                },
+				{
+                    name: 'Role',                    
+                    width: '20%',
+                    cellTemplate: '<div style="padding-left: 10px;">' + '{{row.entity.Role}}' + '</div>'
                 },
                 {
                     name: 'Action',                    
@@ -65,10 +70,10 @@
 					userData[i].Id = rawuser[i].user_id;
 					userData[i].FirstName = rawuser[i].firstname;
 					userData[i].LastName = rawuser[i].lastname;
+					userData[i].Email = rawuser[i].email;
+					userData[i].Contact = rawuser[i].contact;
+					userData[i].Role = rawuser[i].role_name;
 					/*userData[i].Name = rawuser[i].firstname;
-					userData[i].Name = rawuser[i].firstname;
-					userData[i].Name = rawuser[i].firstname;
-					userData[i].Name = rawuser[i].firstname;
 					userData[i].Name = rawuser[i].firstname;
 					userData[i].Name = rawuser[i].firstname;*/
 				}
