@@ -2,7 +2,7 @@
 (function () {
 	angular.module("ivfApp")
 		.controller("userCtrl", ["$scope", "userService", "$cookies", "$q", "$location", "$routeParams", function ($scope, userService, $cookies, $q, $location, $routeParams) {			
-			$scope.user = [];
+			$scope.user = {};
 			$scope.init = function(){
 				loadUsers();
 			};
@@ -86,7 +86,7 @@
 						$scope.errorMessage = str;
 						$scope.error = true;
 					}else{
-						saveuserDetails();
+						saveUserDetails();
 					}
 				});				
 			};

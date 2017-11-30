@@ -2,7 +2,7 @@
 (function () {
 	angular.module("ivfApp")
 		.controller("centerCtrl", ["$scope", "centerService", "$cookies", "$q", "$location", "$routeParams", function ($scope, centerService, $cookies, $q, $location, $routeParams) {			
-			$scope.center = [];
+			$scope.center = {};
 			$scope.init = function(){
 				loadCenters();
 			};
