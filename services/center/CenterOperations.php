@@ -34,11 +34,11 @@ function add($data){
 
 	$center_name = mysqli_real_escape_string($conn, $data['center_name']);
 	$center_address = $data['center_address'];
-	$doctor_id = (int)$data['doctor_id'];
+	//$doctor_id = (int)$data['doctor_id'];
 	
 	$result = array();
 
-	$sql = "insert into center(center_name,center_address,doctor_id) values ('$center_name','$center_address','$doctor_id')";
+	$sql = "insert into center(center_name,center_address) values ('$center_name','$center_address')";
 
 	if(mysqli_query($conn, $sql)){
 		$result['success'] = true;
@@ -55,12 +55,12 @@ function update($data){
 	global $conn;
 	$center_name = mysqli_real_escape_string($conn, $data['center_name']);
 	$center_address = $data['center_address'];
-	$doctor_id = (int)$data['doctor_id'];
+	//$doctor_id = (int)$data['doctor_id'];
 	$center_id = (int)$data['center_id'];
 	
 	$result = array();
 
-	$sql = "update center set center_name='$center_name',center_address='$center_address',doctor_id = $doctor_id where center_id = $center_id";
+	$sql = "update center set center_name='$center_name',center_address='$center_address' where center_id = $center_id";
 
 	if(mysqli_query($conn, $sql)){
 		$result['success'] = true;

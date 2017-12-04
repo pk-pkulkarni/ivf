@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 13, 2017 at 01:16 PM
+-- Generation Time: Dec 04, 2017 at 10:28 AM
 -- Server version: 10.1.13-MariaDB
 -- PHP Version: 7.0.8
 
@@ -29,16 +29,16 @@ SET time_zone = "+00:00";
 CREATE TABLE `center` (
   `center_id` int(11) NOT NULL,
   `center_name` varchar(255) NOT NULL,
-  `center_address` text NOT NULL,
-  `doctor_id` int(11) NOT NULL
+  `center_address` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `center`
 --
 
-INSERT INTO `center` (`center_id`, `center_name`, `center_address`, `doctor_id`) VALUES
-(1, 'Pune', 'Pune', 1);
+INSERT INTO `center` (`center_id`, `center_name`, `center_address`) VALUES
+(1, 'Pune', 'Pune'),
+(2, 'Pune-Kothrud', 'Kothrud');
 
 -- --------------------------------------------------------
 
@@ -152,7 +152,6 @@ CREATE TABLE `user` (
   `email` text NOT NULL,
   `contact` bigint(20) NOT NULL,
   `password` text NOT NULL,
-  `center_id` int(11) NOT NULL,
   `role_id` int(11) NOT NULL,
   `status_id` int(11) NOT NULL DEFAULT '1',
   `token` text NOT NULL,
@@ -164,12 +163,34 @@ CREATE TABLE `user` (
 -- Dumping data for table `user`
 --
 
-INSERT INTO `user` (`user_id`, `firstname`, `lastname`, `email`, `contact`, `password`, `center_id`, `role_id`, `status_id`, `token`, `is_doctor`, `is_embryologist`) VALUES
-(4, 'Abhi', 'Singh', 'asingh@managedmaint.com', 1234, '12345', 1, 1, 1, '', 'N', 'N'),
-(5, 'Sam', 'R', 'r@test.com', 5656768, '12345', 1, 1, 1, '', 'N', 'N'),
-(9, 'Pramod', 'p', 'pp@test.com', 7890765432, 'YUdHcm9DcmVlcHMhJSMhYDEyMzQ=', 1, 3, 1, '', 'N', 'N'),
-(10, 'Prasad', 'Kulkarni', 'p@test.com', 123456, 'YUdHcm9DcmVlcHMhJSMhYHRlc3QxMjM0', 1, 2, 1, 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoiMTAiLCJlbWFpbCI6InBAdGVzdC5jb20ifQ==.AsD0lwdRwRcY3Cdv+p8F0/lLBhuMfUem15gSFr38MOA=', 'N', 'N'),
-(11, 'Sameer', 'patil', 'unkule.sagar@gmail.com', 45631, 'YUdHcm9DcmVlcHMhJSMhYFNhZ2FyQDEyMw==', 1, 1, 1, '', 'N', 'N');
+INSERT INTO `user` (`user_id`, `firstname`, `lastname`, `email`, `contact`, `password`, `role_id`, `status_id`, `token`, `is_doctor`, `is_embryologist`) VALUES
+(4, 'Abhi', 'Singh', 'asingh@managedmaint.com', 1234, '12345', 1, 1, '', 'N', 'N'),
+(5, 'Sam', 'R', 'r@test.com', 5656768, '12345', 1, 1, '', 'N', 'N'),
+(9, 'Pramod', 'p', 'pp@test.com', 7890765432, 'YUdHcm9DcmVlcHMhJSMhYDEyMzQ=', 3, 1, '', 'N', 'N'),
+(10, 'Prasad', 'Kulkarni', 'p@test.com', 123456, 'YUdHcm9DcmVlcHMhJSMhYHRlc3QxMjM0', 2, 1, 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoiMTAiLCJlbWFpbCI6InBAdGVzdC5jb20ifQ==.AsD0lwdRwRcY3Cdv+p8F0/lLBhuMfUem15gSFr38MOA=', 'N', 'N'),
+(11, 'Sameer', 'patil', 'unkule.sagar@gmail.com', 45631, 'YUdHcm9DcmVlcHMhJSMhYFNhZ2FyQDEyMw==', 1, 1, '', 'N', 'N'),
+(18, 'Test', 'User', 'test@test.com', 456456456, 'YUdHcm9DcmVlcHMhJSMhYEcycVlGeDVm', 3, 1, '', 'N', 'N');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `user_to_center`
+--
+
+CREATE TABLE `user_to_center` (
+  `user_to_center_id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `center_id` int(11) NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `user_to_center`
+--
+
+INSERT INTO `user_to_center` (`user_to_center_id`, `user_id`, `center_id`, `created_at`) VALUES
+(1, 10, 1, '2017-12-04 09:06:03'),
+(2, 4, 2, '2017-12-04 09:24:57');
 
 -- --------------------------------------------------------
 
@@ -230,6 +251,12 @@ ALTER TABLE `user`
   ADD PRIMARY KEY (`user_id`);
 
 --
+-- Indexes for table `user_to_center`
+--
+ALTER TABLE `user_to_center`
+  ADD PRIMARY KEY (`user_to_center_id`);
+
+--
 -- Indexes for table `user_to_process`
 --
 ALTER TABLE `user_to_process`
@@ -243,7 +270,7 @@ ALTER TABLE `user_to_process`
 -- AUTO_INCREMENT for table `center`
 --
 ALTER TABLE `center`
-  MODIFY `center_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `center_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `doctor`
 --
@@ -268,7 +295,12 @@ ALTER TABLE `role`
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+--
+-- AUTO_INCREMENT for table `user_to_center`
+--
+ALTER TABLE `user_to_center`
+  MODIFY `user_to_center_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `user_to_process`
 --

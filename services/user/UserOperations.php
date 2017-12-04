@@ -79,25 +79,33 @@ function add($data){
 	}
 	
 
-	$sql = "insert into user(firstname,lastname,email,contact,password,center_id,role_id,status_id,token,is_doctor,is_embryologist) values ('$firstname','$lastname','$email','$contact','$password','$center_id','$role_id','$status_id','','$is_doctor','$is_embryologist')";
-
+	$sql = "insert into user(firstname,lastname,email,contact,password,role_id,status_id,token,is_doctor,is_embryologist) values ('$firstname','$lastname','$email','$contact','$password','$role_id','$status_id','','$is_doctor','$is_embryologist')";
 	if(mysqli_query($conn, $sql)){
-		// Send email to user who is just added
-		$to = $email; // Enter email id which is taken as input
-		$subject = "Your acoount with this email is created in IVF";
-		$txt = "Your Password is ".$str;
-		$headers = "From: ivf@noReply.com" . "\r\n";
+		$last_id = 0;
+		$last_id = mysqli_insert_id($conn);
+		$sql2 = "insert into user_to_center(user_id,center_id) values ($last_id,$center_id)";
+		if(mysqli_query($conn, $sql2)){
+			// Send email to user who is just added
+			$to = $email;
+			$subject = "Your acoount with this email is created in IVF";
+			$txt = "Your Password is ".$str;
+			$headers = "From: ivf@noReply.com" . "\r\n";
 
-		$retval = mail($to,$subject,$txt,$headers);
-		if( $retval == true ) {
-			//
-		}else {
+			$retval = mail($to,$subject,$txt,$headers);
+			if( $retval == true ) {
+				//
+			}else {
+				$result['success'] = true;
+				$result['msg'] = "Record is Created Successfully but Mail is not sent to the user!";
+			}
 			$result['success'] = true;
-			$result['msg'] = "Record is Created Successfully but Mail is not sent to the user!";
+			$result['msg'] = "Record is Created Successfully";
 		}
-		//
-		$result['success'] = true;
-		$result['msg'] = "Record is Created Successfully";
+		else{
+			$result['error'] = true;
+			$result['msg'] = "User is added Successfully but it is not added to appropriate center";
+		}
+		
 	} else{
 		$result['error'] = true;
 		$result['msg'] = "ERROR: Could not able to execute $sql. " . mysqli_error($conn);
@@ -112,13 +120,13 @@ function update($data){
 	$lastname = mysqli_real_escape_string($conn, $data['lastname']);
 	//$email = $data['email'];
 	$contact =  $data['contact'];
-	$center_id = $data['center_id'];
+	//$center_id = $data['center_id'];
 	$role_id = $data['role_id'];
 	$user_id = $data['user_id'];
 	
 	$result = array();
 
-	$sql = "update user set firstname = '$firstname',lastname = '$lastname',contact = $contact,center_id = $center_id,role_id = $role_id where user_id = $user_id";
+	$sql = "update user set firstname = '$firstname',lastname = '$lastname',contact = $contact,role_id = $role_id where user_id = $user_id";
 
 	if(mysqli_query($conn, $sql)){
 		$result['success'] = true;
@@ -156,7 +164,7 @@ function getById($data){
 
 function get($data){
 	global $conn;
-	$sql = "SELECT u.*, r.name as role_name ,c.center_name FROM user u LEFT JOIN role r on u.role_id = r.role_id LEFT JOIN center c on u.center_id = c.center_id";
+	$sql = "SELECT u.*, r.name as role_name ,c.center_name  FROM user u  LEFT JOIN role r on u.role_id = r.role_id LEFT JOIN user_to_center uc on u.user_id = uc.user_id LEFT JOIN center c on uc.center_id = c.center_id";
 
 	$rows = $conn->query($sql);
 						
