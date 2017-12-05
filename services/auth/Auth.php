@@ -65,7 +65,7 @@ if(count($result) > 0){
 		$sqlUpdate = "update user set token = '$token' where user_id = $user_id";
 		$updatedRow = $conn->query($sqlUpdate);
 		
-		$sqlGet = "select u.*,r.name as role_name,c.center_name from user u join role r on r.role_id = u.role_id join center c on c.center_id = u.center_id where u.user_id = $user_id";
+		$sqlGet = "SELECT u.*, r.name as role_name ,c.center_name  FROM user u  LEFT JOIN role r on u.role_id = r.role_id LEFT JOIN user_to_center uc on u.user_id = uc.user_id LEFT JOIN center c on uc.center_id = c.center_id where u.user_id = $user_id";
 
 		$rowsGet = $conn->query($sqlGet);
 							
