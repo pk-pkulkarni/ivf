@@ -5,6 +5,7 @@
 			$scope.user = {};
 			$scope.init = function(){
 				loadUsers();
+				//loadCenter();
 			};
 
 			$scope.userGrid = {
@@ -73,8 +74,8 @@
 					userData[i].Email = rawuser[i].email;
 					userData[i].Contact = rawuser[i].contact;
 					userData[i].Role = rawuser[i].role_name;
-					/*userData[i].Name = rawuser[i].firstname;
 					userData[i].Name = rawuser[i].firstname;
+					/*userData[i].Name = rawuser[i].firstname;
 					userData[i].Name = rawuser[i].firstname;*/
 				}
 				return userData;
