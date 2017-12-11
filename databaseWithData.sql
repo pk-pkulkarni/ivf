@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 04, 2017 at 10:28 AM
+-- Generation Time: Dec 07, 2017 at 07:21 AM
 -- Server version: 10.1.13-MariaDB
 -- PHP Version: 7.0.8
 
@@ -88,6 +88,31 @@ CREATE TABLE `patient` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `patient_to_process`
+--
+
+CREATE TABLE `patient_to_process` (
+  `patient_to_process_id` int(11) NOT NULL,
+  `patient_id` int(11) NOT NULL,
+  `process_id` int(11) NOT NULL,
+  `weight` decimal(4,2) NOT NULL,
+  `embryologist_id` int(11) NOT NULL,
+  `batch_no` varchar(100) NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` date DEFAULT '0000-00-00',
+  `updated_by` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `patient_to_process`
+--
+
+INSERT INTO `patient_to_process` (`patient_to_process_id`, `patient_id`, `process_id`, `weight`, `embryologist_id`, `batch_no`, `created_at`, `updated_at`, `updated_by`) VALUES
+(1, 1, 1, '56.00', 1, 'FBG56', '2017-12-06 12:57:19', '0000-00-00', NULL);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `process`
 --
 
@@ -98,6 +123,19 @@ CREATE TABLE `process` (
   `updated_at` date NOT NULL DEFAULT '0000-00-00',
   `updated_by` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `process`
+--
+
+INSERT INTO `process` (`process_id`, `process_name`, `created_at`, `updated_at`, `updated_by`) VALUES
+(1, 'Oocyte Receiver', '2017-12-06 12:50:02', '0000-00-00', NULL),
+(2, 'Oocyte Donar', '2017-12-06 12:50:02', '0000-00-00', NULL),
+(3, 'Embryo Receiver', '2017-12-06 12:51:42', '0000-00-00', NULL),
+(4, 'Embryo Donar', '2017-12-06 12:51:42', '0000-00-00', NULL),
+(5, 'Cryo Preservation', '2017-12-06 12:51:42', '0000-00-00', NULL),
+(6, 'Frozen Embryo Transfer', '2017-12-06 12:51:42', '0000-00-00', NULL),
+(7, 'Self', '2017-12-06 12:51:42', '0000-00-00', NULL);
 
 -- --------------------------------------------------------
 
@@ -169,7 +207,8 @@ INSERT INTO `user` (`user_id`, `firstname`, `lastname`, `email`, `contact`, `pas
 (9, 'Pramod', 'p', 'pp@test.com', 7890765432, 'YUdHcm9DcmVlcHMhJSMhYDEyMzQ=', 3, 1, '', 'N', 'N'),
 (10, 'Prasad', 'Kulkarni', 'p@test.com', 123456, 'YUdHcm9DcmVlcHMhJSMhYHRlc3QxMjM0', 2, 1, 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoiMTAiLCJlbWFpbCI6InBAdGVzdC5jb20ifQ==.AsD0lwdRwRcY3Cdv+p8F0/lLBhuMfUem15gSFr38MOA=', 'N', 'N'),
 (11, 'Sameer', 'patil', 'unkule.sagar@gmail.com', 45631, 'YUdHcm9DcmVlcHMhJSMhYFNhZ2FyQDEyMw==', 1, 1, '', 'N', 'N'),
-(18, 'Test', 'User', 'test@test.com', 456456456, 'YUdHcm9DcmVlcHMhJSMhYEcycVlGeDVm', 3, 1, '', 'N', 'N');
+(18, 'Test', 'User', 'test@test.com', 456456456, 'YUdHcm9DcmVlcHMhJSMhYEcycVlGeDVm', 3, 1, '', 'N', 'N'),
+(19, 'Virat', 'Kohli', 'vk@test.com', 123456, 'YUdHcm9DcmVlcHMhJSMhYEhMTUp2cVFq', 0, 1, '', 'N', 'N');
 
 -- --------------------------------------------------------
 
@@ -190,25 +229,8 @@ CREATE TABLE `user_to_center` (
 
 INSERT INTO `user_to_center` (`user_to_center_id`, `user_id`, `center_id`, `created_at`) VALUES
 (1, 10, 1, '2017-12-04 09:06:03'),
-(2, 4, 2, '2017-12-04 09:24:57');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `user_to_process`
---
-
-CREATE TABLE `user_to_process` (
-  `user_to_process_id` int(11) NOT NULL,
-  `user_id` int(11) NOT NULL,
-  `process_id` int(11) NOT NULL,
-  `weight` decimal(4,2) NOT NULL,
-  `embryologist_id` int(11) NOT NULL,
-  `batch_no` varchar(100) NOT NULL,
-  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `updated_at` date NOT NULL DEFAULT '0000-00-00',
-  `updated_by` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+(2, 4, 2, '2017-12-04 09:24:57'),
+(3, 19, 1, '2017-12-04 09:32:39');
 
 --
 -- Indexes for dumped tables
@@ -231,6 +253,12 @@ ALTER TABLE `doctor`
 --
 ALTER TABLE `patient`
   ADD PRIMARY KEY (`patient_id`);
+
+--
+-- Indexes for table `patient_to_process`
+--
+ALTER TABLE `patient_to_process`
+  ADD PRIMARY KEY (`patient_to_process_id`);
 
 --
 -- Indexes for table `process`
@@ -257,12 +285,6 @@ ALTER TABLE `user_to_center`
   ADD PRIMARY KEY (`user_to_center_id`);
 
 --
--- Indexes for table `user_to_process`
---
-ALTER TABLE `user_to_process`
-  ADD PRIMARY KEY (`user_to_process_id`);
-
---
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -282,10 +304,15 @@ ALTER TABLE `doctor`
 ALTER TABLE `patient`
   MODIFY `patient_id` int(11) NOT NULL AUTO_INCREMENT;
 --
+-- AUTO_INCREMENT for table `patient_to_process`
+--
+ALTER TABLE `patient_to_process`
+  MODIFY `patient_to_process_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+--
 -- AUTO_INCREMENT for table `process`
 --
 ALTER TABLE `process`
-  MODIFY `process_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `process_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 --
 -- AUTO_INCREMENT for table `role`
 --
@@ -295,17 +322,12 @@ ALTER TABLE `role`
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 --
 -- AUTO_INCREMENT for table `user_to_center`
 --
 ALTER TABLE `user_to_center`
-  MODIFY `user_to_center_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
---
--- AUTO_INCREMENT for table `user_to_process`
---
-ALTER TABLE `user_to_process`
-  MODIFY `user_to_process_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `user_to_center_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
