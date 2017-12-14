@@ -40,9 +40,13 @@ if(count($result) > 0){
 		$header = json_encode($header);		
 		$header = base64_encode($header);
 		
+		date_default_timezone_set('Asia/Kolkata');
+		$currentDate =  date('Y-m-d H:i:s');
+		
 		$payload = [      
 			"user_id" => $fetchedUserData['user_id'],
-			"email" => $fetchedUserData['email']
+			"email" => $fetchedUserData['email'],
+			"currentDate" => $currentDate
 		];
 		
 		$payload = json_encode($payload);
