@@ -15,5 +15,6 @@ else{
 	$updatedRow = $conn->query($sqlUpdate);
 	$result['success'] = true;
 	$result['msg'] = "User is logged out and token is set to blank";
+	echo json_encode($result);
 }
 	

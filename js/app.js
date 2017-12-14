@@ -2,6 +2,15 @@
 var ivfApp = angular.module("ivfApp", ["ngRoute", "oc.lazyLoad", "ngCookies", "ui.grid", "ui.grid.pagination"])
 		.config(["$routeProvider", function ($routeProvider) {
 		$routeProvider
+		.when("/logOut", {
+			templateUrl: "templates/logOut/logOut.html",
+			controller: "logOutCtrl",
+			resolve: {
+				loadAsset: ['$ocLazyLoad', function($ocLazyLoad){
+					return $ocLazyLoad.load(['js/controllers/logOut/logOutCtrl.js']);
+				}]
+			}
+		})
 		.when("/centerDetails", {
 			templateUrl: "templates/center/centerDetails.html",
 			controller: "centerCtrl",
