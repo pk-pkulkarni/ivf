@@ -1,0 +1,227 @@
+<div id= "parentDiv" ng-controller="patientCtrl" ng-init="editPatientForminit()">
+	<div class="row">
+        <!-- left column -->
+        <div class="col-md-6">
+          <!-- Horizontal Form -->
+          <div class="box box-info">
+            <div class="box-header with-border">
+              <h3 class="box-title">Husband's Details</h3>
+            </div>
+            <!-- /.box-header -->
+            <!-- form start -->
+            <form class="form-horizontal">
+              <div class="box-body">
+				<div class="form-group" ng-show="error" >
+				  <label class="col-md-4 control-label"></label>
+				  <div class="col-md-8">
+					<div style="color: red;">{{errorMessage}}</div>
+				  </div>
+			    </div>
+                <div class="form-group">
+                  <label for="husband_name" class="col-sm-4 control-label">Name</label>
+
+                  <div class="col-sm-8">
+                    <input type="text" class="form-control" ng-model="patient.husband_name" id="husband_name" placeholder="Enter husband name...">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="husband_blood_group" class="col-sm-4 control-label">Blood Group</label>
+
+                  <div class="col-sm-8">
+                    <input type="text" class="form-control" ng-model="patient.husband_blood_group" id="husband_blood_group" placeholder="Enter blood group...">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="husband_height" class="col-sm-4 control-label">Height</label>
+
+                  <div class="col-sm-8">
+                    <input type="text" class="form-control" ng-model="patient.husband_height" ng-change="getHusbandBMI()" id="husband_height" placeholder="Enter height in meters...">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="husband_weight" class="col-sm-4 control-label">Weight</label>
+
+                  <div class="col-sm-8">
+                    <input type="text" class="form-control" ng-model="patient.husband_weight" ng-change="getHusbandBMI()" id="husband_weight" placeholder="Enter weight in kilo grams...">
+                  </div>
+                </div>
+				<div class="form-group">
+                  <label for="husband_dob" class="col-sm-4 control-label">Date of Birth</label>
+
+                  <div class="col-sm-8">
+                    <input type="date" class="form-control" ng-change='getHusbangAge()' ng-model="patient.husband_dob" id="husband_dob" placeholder="">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="husband_age" class="col-sm-4 control-label">Age</label>
+
+                  <div class="col-sm-8">
+                    <!--<input type="text" class="form-control" ng-model="patient.husband_age" id="husband_age" placeholder="">-->
+					<label class="form-control" id="husband_age" placeholder="">{{patient.husband_age}}</lable>
+                  </div>
+                </div>
+                
+                <div class="form-group">
+                  <label for="husband_phone" class="col-sm-4 control-label">Phone</label>
+
+                  <div class="col-sm-8">
+                    <input type="text"   class="form-control" ng-model="patient.husband_phone" id="husband_phone" placeholder="">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="husband_email" class="col-sm-4 control-label">Email</label>
+
+                  <div class="col-sm-8">
+                    <input type="text" class="form-control" ng-model="patient.husband_email" id="husband_email" placeholder="">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="husband_bmi" class="col-sm-4 control-label">BMI</label>
+
+                  <div class="col-sm-8">
+                    <!--<input type="text" class="form-control" ng-model="patient.husband_bmi" id="husband_bmi" placeholder="">-->
+					<label class="form-control" id="husband_bmi" placeholder="">{{patient.husband_bmi}}</lable>
+                  </div>
+                </div>                
+              </div>
+              <!-- /.box-body -->              
+            </form>
+          </div>
+          <!-- /.box -->          
+        </div>
+
+        <!--/.col (left) -->
+        <!-- right column -->
+        <div class="col-md-6">
+          <!-- Horizontal Form -->
+          <div class="box box-info">
+            <div class="box-header with-border">
+              <h3 class="box-title">Wife's Details</h3>
+            </div>
+            <!-- /.box-header -->
+            <!-- form start -->
+            <form class="form-horizontal">
+              <div class="box-body">
+                <div class="form-group">
+                  <label for="wife_name" class="col-sm-4 control-label">Name</label>
+
+                  <div class="col-sm-8">
+                    <input type="text" class="form-control" ng-model="patient.wife_name" id="wife_name" placeholder="Enter wife name...">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="wife_blood_group" class="col-sm-4 control-label">Blood Group</label>
+
+                  <div class="col-sm-8">
+                    <input type="text" class="form-control" ng-model="patient.wife_blood_group" id="wife_blood_group" placeholder="Enter blood group...">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="wife_height"  class="col-sm-4 control-label">Height</label>
+
+                  <div class="col-sm-8">
+                    <input type="text" class="form-control"  ng-model="patient.wife_height" ng-change="getWifeBMI()" id="wife_height" placeholder="Enter height in meters...">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="wife_weight" class="col-sm-4 control-label">Weight</label>
+
+                  <div class="col-sm-8">
+                    <input type="text" class="form-control" ng-model="patient.wife_weight" ng-change="getWifeBMI()" id="wife_weight" placeholder="Enter weight in kilo grams...">
+                  </div>
+                </div>
+				<div class="form-group">
+                  <label for="wife_dob dob" class="col-sm-4 control-label">Date of Birth</label>
+
+                  <div class="col-sm-8">
+                    <input type="date" class="form-control" ng-change='getWifeAge()' ng-model="patient.wife_dob" id="wife_dob" placeholder="">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="wife_age" class="col-sm-4 control-label">Age</label>
+
+                  <div class="col-sm-8">
+                    <label class="form-control" id="wife_age" placeholder="">{{patient.wife_age}}</lable>
+                  </div>
+                </div>
+                
+                <div class="form-group">
+                  <label for="wife_phone" class="col-sm-4 control-label">Phone</label>
+
+                  <div class="col-sm-8">
+                    <input type="text" class="form-control"   ng-model="patient.wife_phone" id="wife_phone" placeholder="">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="wife_email" class="col-sm-4 control-label">Email</label>
+
+                  <div class="col-sm-8">
+                    <input type="text" class="form-control" ng-model="patient.wife_email" id="wife_email" placeholder="">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="wife_bmi" class="col-sm-4 control-label">BMI</label>
+
+                  <div class="col-sm-8">
+                    <!--<input type="text" class="form-control" ng-model="patient.wife_bmi" id="wife_bmi" placeholder="">-->
+					<label class="form-control" id="wife_bmi" placeholder="">{{patient.wife_bmi}}</lable>
+                  </div>
+                </div>                
+              </div>
+              <!-- /.box-body -->              
+            </form>
+          </div>
+          <!-- /.box -->          
+        </div>
+        <!--/.col (right) -->
+      </div>
+	<div class="box box-info">
+		<div class="box-header with-border">
+		  <h3 class="box-title">Common Details</h3>
+		</div>
+		<!-- /.box-header -->
+		<!-- form start -->
+		<div class="box-body">
+			<div class="row">
+				<div class="col-md-6">
+					<form class="form-horizontal">
+					  <div class="box-body">
+					  <div class="form-group">
+						  <label for="marridge_date" class="col-sm-4 control-label">Marriage Date</label>
+
+						  <div class="col-sm-8">
+							<input type="date" class="form-control" ng-model="patient.marridge_date" id="marridge_date" placeholder="">
+						  </div>
+						</div>
+						<div class="form-group">
+						  <label for="marridge_since" class="col-sm-4 control-label">Marriage Since</label>
+
+						  <div class="col-sm-8">
+							<input type="date" class="form-control" ng-model="patient.marridge_since" id="marridge_since" placeholder="">
+						  </div>
+						</div>
+						<div class="form-group">
+						  <label for="inputEmail3" class="col-sm-4 control-label">Address</label>
+
+						  <div class="col-sm-8">
+							<textarea class="form-control" rows="3" ng-model="patient.address" id="address" placeholder="Enter Address..."></textarea> 
+						  </div>
+						</div>			        
+					  </div>
+					  <!-- /.box-body -->
+					  <div class="box-footer">
+						<button type="submit" ng-click="cancelAddPatient()" class="btn btn-default">Cancel</button>
+						<a class="btn btn-info pull-right" ng-click="addUpdatePatient()">Save & Next</a>
+						<!--<a class="btn btn-info pull-right" href="#/harmones">Save & Next</a>-->
+					  </div>
+					  <!-- /.box-footer -->
+					</form>
+				</div>
+				
+			</div>
+		</div>
+	</div>
+
+</div>
+
+

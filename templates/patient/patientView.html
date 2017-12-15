@@ -1,0 +1,227 @@
+<div id= "parentDiv" ng-controller="patientCtrl" ng-init="ViewPatient()">
+	<div class="row">
+        <!-- left column -->
+        <div class="col-md-6">
+          <!-- Horizontal Form -->
+          <div class="box box-info">
+            <div class="box-header with-border">
+              <h3 class="box-title">Husband's Details</h3>
+            </div>
+            <!-- /.box-header -->
+            <!-- form start -->
+            <form class="form-horizontal">
+              <div class="box-body">
+				
+                <div class="form-group">
+                  <label for="husband_name" class="col-sm-4 control-label">Name</label>
+
+                  <div class="col-sm-8">
+                    {{patient.husband_name}}
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="husband_blood_group" class="col-sm-4 control-label">Blood Group</label>
+
+                  <div class="col-sm-8">
+                  	{{patient.husband_blood_group}}
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="husband_height" class="col-sm-4 control-label">Height</label>
+
+                  <div class="col-sm-8">
+                  	{{patient.husband_height}}
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="husband_weight" class="col-sm-4 control-label">Weight</label>
+
+                  <div class="col-sm-8">
+                  	{{patient.husband_weight}}
+                    
+                  </div>
+                </div>
+				<div class="form-group">
+                  <label for="husband_dob" class="col-sm-4 control-label">Date of Birth</label>
+
+                  <div class="col-sm-8">
+                  	{{patient.husband_dob}}
+                    
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="husband_age" class="col-sm-4 control-label">Age</label>
+
+                  <div class="col-sm-8">
+                  	{{patient.husband_age}}
+                  </div>
+                </div>
+                
+                <div class="form-group">
+                  <label for="husband_phone" class="col-sm-4 control-label">Phone</label>
+
+                  <div class="col-sm-8">
+                  	{{patient.husband_phone}}
+                    
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="husband_email" class="col-sm-4 control-label">Email</label>
+
+                  <div class="col-sm-8">
+                  	{{patient.husband_email}}
+                    
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="husband_bmi" class="col-sm-4 control-label">BMI</label>
+
+                  <div class="col-sm-8">
+                  	{{patient.husband_bmi}}
+                  </div>
+                </div>                
+              </div>
+              <!-- /.box-body -->              
+            </form>
+          </div>
+          <!-- /.box -->          
+        </div>
+
+        <!--/.col (left) -->
+        <!-- right column -->
+        <div class="col-md-6">
+          <!-- Horizontal Form -->
+          <div class="box box-info">
+            <div class="box-header with-border">
+              <h3 class="box-title">Wife's Details</h3>
+            </div>
+            <!-- /.box-header -->
+            <!-- form start -->
+            <form class="form-horizontal">
+              <div class="box-body">
+                <div class="form-group">
+                  <label for="wife_name" class="col-sm-4 control-label">Name</label>
+
+                  <div class="col-sm-8">
+                  	{{patient.wife_name}}
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="wife_blood_group" class="col-sm-4 control-label">Blood Group</label>
+
+                  <div class="col-sm-8">
+                  	{{patient.wife_blood_group}}
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="wife_height"  class="col-sm-4 control-label">Height</label>
+
+                  <div class="col-sm-8">
+                  	{{patient.wife_height}}
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="wife_weight" class="col-sm-4 control-label">Weight</label>
+
+                  <div class="col-sm-8">
+                  	{{patient.wife_weight}}
+                  </div>
+                </div>
+				<div class="form-group">
+                  <label for="wife_dob dob" class="col-sm-4 control-label">Date of Birth</label>
+
+                  <div class="col-sm-8">
+                  	{{patient.wife_dob}}
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="wife_age" class="col-sm-4 control-label">Age</label>
+
+                  <div class="col-sm-8">
+                  	{{patient.wife_age}}
+                  </div>
+                </div>
+                
+                <div class="form-group">
+                  <label for="wife_phone" class="col-sm-4 control-label">Phone</label>
+
+                  <div class="col-sm-8">
+                  	{{patient.wife_phone}}
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="wife_email" class="col-sm-4 control-label">Email</label>
+
+                  <div class="col-sm-8">
+                  	{{patient.wife_email}}
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="wife_bmi" class="col-sm-4 control-label">BMI</label>
+
+                  <div class="col-sm-8">
+                  	{{patient.wife_bmi}}
+                  </div>
+                </div>                
+              </div>
+              <!-- /.box-body -->              
+            </form>
+          </div>
+          <!-- /.box -->          
+        </div>
+        <!--/.col (right) -->
+      </div>
+	<div class="box box-info">
+		<div class="box-header with-border">
+		  <h3 class="box-title">Common Details</h3>
+		</div>
+		<!-- /.box-header -->
+		<!-- form start -->
+		<div class="box-body">
+			<div class="row">
+				<div class="col-md-6">
+					<form class="form-horizontal">
+					  <div class="box-body">
+					  <div class="form-group">
+						  <label for="marridge_date" class="col-sm-4 control-label">Marriage Date</label>
+
+						  <div class="col-sm-8">
+						  	{{patient.marridge_date}}
+							
+						  </div>
+						</div>
+						<div class="form-group">
+						  <label for="marridge_since" class="col-sm-4 control-label">Marriage Since</label>
+
+						  <div class="col-sm-8">
+						  	{{patient.marridge_since}}
+						  </div>
+						</div>
+						<div class="form-group">
+						  <label for="inputEmail3" class="col-sm-4 control-label">Address</label>
+
+						  <div class="col-sm-8">
+						  	{{patient.address}} 
+						  </div>
+						</div>
+						<div class="form-group">
+			          	  <label class="col-md-4 control-label"></label>
+
+			          	   <div class="col-md-8">
+			            	<a href="" class="btn btn-info" ng-click="ViewPatientGrid()">Back</a>	
+			              </div>
+			            </div>			        
+					  </div>
+					  <!-- /.box-body -->
+					  
+					</form>
+				</div>
+				
+			</div>
+		</div>
+	</div>
+
+</div>
+
+
+

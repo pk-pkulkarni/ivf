@@ -1,10 +1,10 @@
 <?php
 
 include ("../config.php");
-include ("../common.php");
+//include ("../common.php");
 
 
-
+$key = "aGGroCreeps!%#!`";
 $data = (json_decode(file_get_contents("php://input"),true)); // Data will come in JSON format from angular
 $operation = "";
 if(isset($data['operation'])){
@@ -55,7 +55,7 @@ function add($data){
 	
 	$result = array();
 
-	$sql = "insert into patient(wife_name,wife_blood_group,wife_height,wife_weight,wife_age,wife_dob,wife_phone,wife_email,wife_bmi,husband_name,husband_blood_group,husband_height,husband_weight,husband_age,husband_dob,husband_phone,husband_email,husband_bmi,address,marridge_date,marridge_since) values ('$wife_name','$wife_blood_group',$wife_height,$wife_weight,$wife_age,'$wife_dob','$wife_phone','$wife_email',$wife_bmi,'$husband_name','$husband_blood_group',$husband_height,$husband_weight,$husband_age,'$husband_dob','$husband_phone','$husband_email',$husband_bmi,$address,$marridge_date,$marridge_since)";
+	$sql = "insert into patient(wife_name,wife_blood_group,wife_height,wife_weight,wife_age,wife_dob,wife_phone,wife_email,wife_bmi,husband_name,husband_blood_group,husband_height,husband_weight,husband_age,husband_dob,husband_phone,husband_email,husband_bmi,address,marridge_date,marridge_since) values ('$wife_name','$wife_blood_group',$wife_height,$wife_weight,$wife_age,'$wife_dob','$wife_phone','$wife_email',$wife_bmi,'$husband_name','$husband_blood_group',$husband_height,$husband_weight,$husband_age,'$husband_dob','$husband_phone','$husband_email',$husband_bmi,'$address','$marridge_date','$marridge_since')";
 
 	if(mysqli_query($conn, $sql)){
 		$result['success'] = true;

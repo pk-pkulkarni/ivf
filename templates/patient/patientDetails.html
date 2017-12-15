@@ -1,0 +1,17 @@
+<link rel="stylesheet" type="text/css" href="lib/ui-grid/ui-grid.min.css">
+<div class="box box-info" ng-controller="patientCtrl" ng-init="init()">
+	<div class="box-header with-border">
+	  <h3 class="box-title">Patient Details</h3>
+	</div>
+	<!-- /.box-header -->
+	<!-- form start -->
+	<div class="box-body">
+        <div class="row">
+			<div class="col-md-12">			    
+				<a href="#!/patientAdd" class="btn btn-info">Add Patient</a>
+				<div ui-grid=patientGrid class="myGrid" ui-grid-pagination></div>
+			</div>			
+		</div>
+	</div>
+</div>
+
