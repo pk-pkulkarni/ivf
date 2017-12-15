@@ -2,7 +2,14 @@ ivfApp.controller("loginCtrl", ["$scope", "loginService", "$cookies", "$q", "$wi
 	
 	$scope.init = function(){
 		if($cookies.get('token') != undefined){
-			$window.location.href = '/ivf/#!/centerDetails';	
+			var token = {
+				'token' : $cookies.get('token')
+			}
+			loginService.authBeforeLogin(token).then(function(data){
+				if(data.success == true){
+					$window.location.href = '/ivf/#!/centerDetails';		
+				}
+			});			
 		};
 	};
 
@@ -73,7 +80,13 @@ ivfApp.factory("loginService",["$http", '$q', "baseSvc", function($http, $q, bas
 		return baseSvc.postRequest(url, loginDetails);
 	};
 
+	var authBeforeLogin = function(token){
+		var url = "services/auth/UserLogInStatus.php";
+		return baseSvc.postRequest(url, token);	
+	};
+
 	return{
-		authenticateUser : authenticateUser	
+		authenticateUser : authenticateUser,
+		authBeforeLogin : authBeforeLogin	
 	};
 }]);

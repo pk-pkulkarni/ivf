@@ -28,11 +28,7 @@
                   		'<a type="button" class="btn btn-default btn-sm" href="#!/centerEdit/{{row.entity.Id}}"><i class="fa fa-edit"></i></a>' +
                   		'<a type="button" class="btn btn-default btn-sm" href="#!/centerView/{{row.entity.Id}}"><i class="fa fa-reorder"></i></a>' +
                   		'<button type="button" class="btn btn-default btn-sm"><i class="fa fa-trash-o" ng-click="grid.appScope.deleteCenter(row.entity.Id);"></i></button></div></div>'
-                }
-			      /*{ field: 'Name'},
-			      { field: 'Address'},
-			      { field: 'Action'}*/
-			    ],
+                }],
 			    onRegisterApi: function( gridApi ) {
 			      $scope.gridApi = gridApi;
 			      $scope.gridApi.core.on.sortChanged( $scope, function( grid, sort ) {
@@ -86,7 +82,7 @@
 				return deferred.promise;
 			};
 
-			var saveCenterDetails = function(){
+			var saveCenterDetails = function(){//center data is binded by view
 				if ($routeParams.Id) {					
 					$scope.center['Id'] = $routeParams.Id;
 					$scope.center['operation'] = 'update';
