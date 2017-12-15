@@ -30,7 +30,7 @@ if(count($result) > 0){
 	}
 	if(count($result) > 0){
 		
-		$sql = "select * from user where email = '$username' and password='$password' and status_id = 1"; // 1 = Active , checking if user is active or not
+		$sql = "SELECT u.*, r.name as role_name ,c.center_name,c.center_id  FROM user u  LEFT JOIN role r on u.role_id = r.role_id LEFT JOIN user_to_center uc on u.user_id = uc.user_id LEFT JOIN center c on uc.center_id = c.center_id where u.email = '$username' and u.password='$password' and u.status_id = 1"; // 1 = Active , checking if user is active or not
 
 		$rows = $conn->query($sql);
 							
@@ -38,7 +38,6 @@ if(count($result) > 0){
 		while($res = mysqli_fetch_assoc($rows)) {		        
 			$result[] = $res;	
 		}
-		
 		if(count($result) > 0){
 		
 			$fetchedUserData = $result[0];
@@ -58,6 +57,13 @@ if(count($result) > 0){
 			$payload = [      
 				"user_id" => $fetchedUserData['user_id'],
 				"email" => $fetchedUserData['email'],
+				"role_id" =>$fetchedUserData['role_id'],
+				"role_name" =>$fetchedUserData['role_name'],
+				"center_id" =>$fetchedUserData['center_id'],
+				"center_name" =>$fetchedUserData['center_name'],
+				"status_id" =>$fetchedUserData['status_id'],
+				"is_doctor" =>$fetchedUserData['is_doctor'],
+				"is_embryologist" =>$fetchedUserData['is_embryologist'],
 				"currentDate" => $currentDate
 			];
 			

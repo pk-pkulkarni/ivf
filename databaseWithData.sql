@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 07, 2017 at 07:21 AM
+-- Generation Time: Dec 15, 2017 at 10:35 AM
 -- Server version: 10.1.13-MariaDB
 -- PHP Version: 7.0.8
 
@@ -29,16 +29,17 @@ SET time_zone = "+00:00";
 CREATE TABLE `center` (
   `center_id` int(11) NOT NULL,
   `center_name` varchar(255) NOT NULL,
-  `center_address` text NOT NULL
+  `center_address` text NOT NULL,
+  `status_id` int(11) DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `center`
 --
 
-INSERT INTO `center` (`center_id`, `center_name`, `center_address`) VALUES
-(1, 'Pune', 'Pune'),
-(2, 'Pune-Kothrud', 'Kothrud');
+INSERT INTO `center` (`center_id`, `center_name`, `center_address`, `status_id`) VALUES
+(1, 'Pune', 'Pune', 1),
+(2, 'Pune-Kothrud', 'Kothrud', 1);
 
 -- --------------------------------------------------------
 
@@ -164,6 +165,7 @@ INSERT INTO `role` (`role_id`, `name`) VALUES
 --
 
 CREATE TABLE `status` (
+  `id` int(11) NOT NULL,
   `status_id` int(11) NOT NULL,
   `status_title` varchar(255) NOT NULL,
   `status_type` varchar(255) NOT NULL
@@ -173,9 +175,11 @@ CREATE TABLE `status` (
 -- Dumping data for table `status`
 --
 
-INSERT INTO `status` (`status_id`, `status_title`, `status_type`) VALUES
-(1, 'Active', 'user'),
-(2, 'Deactive', 'user');
+INSERT INTO `status` (`id`, `status_id`, `status_title`, `status_type`) VALUES
+(1, 1, 'Active', 'user'),
+(2, 2, 'Deactive', 'user'),
+(3, 1, 'Active', 'center'),
+(4, 2, 'Deactive', 'center');
 
 -- --------------------------------------------------------
 
@@ -205,7 +209,7 @@ INSERT INTO `user` (`user_id`, `firstname`, `lastname`, `email`, `contact`, `pas
 (4, 'Abhi', 'Singh', 'asingh@managedmaint.com', 1234, '12345', 1, 1, '', 'N', 'N'),
 (5, 'Sam', 'R', 'r@test.com', 5656768, '12345', 1, 1, '', 'N', 'N'),
 (9, 'Pramod', 'p', 'pp@test.com', 7890765432, 'YUdHcm9DcmVlcHMhJSMhYDEyMzQ=', 3, 1, '', 'N', 'N'),
-(10, 'Prasad', 'Kulkarni', 'p@test.com', 123456, 'YUdHcm9DcmVlcHMhJSMhYHRlc3QxMjM0', 2, 1, 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoiMTAiLCJlbWFpbCI6InBAdGVzdC5jb20ifQ==.AsD0lwdRwRcY3Cdv+p8F0/lLBhuMfUem15gSFr38MOA=', 'N', 'N'),
+(10, 'Prasad', 'Kulkarni', 'p@test.com', 123456, 'YUdHcm9DcmVlcHMhJSMhYHRlc3QxMjM0', 2, 1, 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoiMTAiLCJlbWFpbCI6InBAdGVzdC5jb20iLCJyb2xlX2lkIjoiMiIsInJvbGVfbmFtZSI6IkNlbnRlciBBZG1pbiIsImNlbnRlcl9pZCI6IjEiLCJjZW50ZXJfbmFtZSI6IlB1bmUiLCJzdGF0dXNfaWQiOiIxIiwiaXNfZG9jdG9yIjoiTiIsImlzX2VtYnJ5b2xvZ2lzdCI6Ik4iLCJjdXJyZW50RGF0ZSI6IjIwMTctMTItMTUgMTQ6Mjg6NDEifQ==.CWwpNWadhqcZaUyuRApSPlvZEVnrH2eGothYyepuuQ4=', 'N', 'N'),
 (11, 'Sameer', 'patil', 'unkule.sagar@gmail.com', 45631, 'YUdHcm9DcmVlcHMhJSMhYFNhZ2FyQDEyMw==', 1, 1, '', 'N', 'N'),
 (18, 'Test', 'User', 'test@test.com', 456456456, 'YUdHcm9DcmVlcHMhJSMhYEcycVlGeDVm', 3, 1, '', 'N', 'N'),
 (19, 'Virat', 'Kohli', 'vk@test.com', 123456, 'YUdHcm9DcmVlcHMhJSMhYEhMTUp2cVFq', 0, 1, '', 'N', 'N');
@@ -273,6 +277,12 @@ ALTER TABLE `role`
   ADD PRIMARY KEY (`role_id`);
 
 --
+-- Indexes for table `status`
+--
+ALTER TABLE `status`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `user`
 --
 ALTER TABLE `user`
@@ -318,6 +328,11 @@ ALTER TABLE `process`
 --
 ALTER TABLE `role`
   MODIFY `role_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+--
+-- AUTO_INCREMENT for table `status`
+--
+ALTER TABLE `status`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT for table `user`
 --

@@ -73,6 +73,40 @@ function update($data){
 	echo json_encode($result);
 }
 
+function deactivate($data){
+	global $conn;
+	global $token_center_id;
+	$center_id = (int)$data['center_id'];
+	$resultData = array();
+	
+	if($token_center_id == $center_id){
+		$resultData['error'] = true;
+		$resultData['msg'] = "You can not delete/deactivate this center";
+	}
+	else{
+		$sql = "select user_id from user_to_center where center_id = $center_id";
+		$rows = $conn->query($sql);
+							
+		$result = [];
+		
+		while($res = mysqli_fetch_assoc($rows)) {		        
+			$result[] = $res;	
+		}
+		if(count($result) > 0){
+			$userIdArray = array();
+			$userIdArray = $result[0];
+		}
+		$sql = "update user set status_id= 2 where user_id IN (".implode(',',$userIdArray).")"; //Deactivating all the users belong to this center
+		$updatedRow = $conn->query($sql);
+		
+		$sqlUpdateCenter = "update center set status_id= 2 where center_id = $center_id"; //Deactivating all the users belong to this center
+		$updatedRow = $conn->query($sqlUpdateCenter);
+		
+		$result['success'] = true;
+		$result['msg'] = "Ceneter and it's user are deactivated successfully";
+	}
+}
+
 function getById($data){
 	$id = (int)$data['center_id'];
 	global $conn;
@@ -99,18 +133,27 @@ function getById($data){
 
 function get($data){
 	global $conn;
-	$sql = "select * from center";
+	global $token_role_name;
+	
+	if($token_role_name == "Super Admin"){
+		$sql = "select * from center";
+	
+		$rows = $conn->query($sql);
+							
+		$result = [];
+		$resultData = array();
+		while($res = mysqli_fetch_assoc($rows)) {		        
+			$result[] = $res;	
+		}
 
-	$rows = $conn->query($sql);
-						
-	$result = [];
-	$resultData = array();
-	while($res = mysqli_fetch_assoc($rows)) {		        
-		$result[] = $res;	
+		$resultData['success'] = true;
+		$resultData['data'] = $result;
 	}
-
-	$resultData['success'] = true;
-	$resultData['data'] = $result;
+	else{
+		$resultData['error'] = true;
+		$resultData['data'] = "You are not authorized to access this service";
+	}
+	
 	echo json_encode($resultData);
 }
 

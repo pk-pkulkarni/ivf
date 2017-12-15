@@ -32,11 +32,28 @@ else{
 	}
 	
 	if(count($result) > 0){
-		/*
-		Do something if required
-		$returnData['success'] = true;
-		$returnData['msg'] = "Valid User";
-		*/
+		$recievedJwt = $receivedToken;
+
+		// Split a string by '.' 
+		$jwt_values = explode('.', $recievedJwt);
+
+		$payloadData = $jwt_values[1]; // Payload Data
+		$payloadData = base64_decode($payloadData);
+		$payloadData = json_decode($payloadData,true); // This is Payload Data Array
+		
+		$tokenDecodedData = array();
+		$tokenDecodedData = $payloadData;
+		
+		$token_user_id = $payloadData['user_id'];
+		$token_email = $payloadData['email'];
+		$token_role_id = $payloadData['role_id'];
+		$token_role_name = $payloadData['role_name'];
+		$token_center_id = $payloadData['center_id'];
+		$token_center_name = $payloadData['user_id'];
+		$token_status_id = $payloadData['status_id'];
+		$token_is_doctor = $payloadData['is_doctor'];
+		$token_is_embryologist = $payloadData['user_id'];
+		$token_currentDate = $payloadData['currentDate'];
 	}
 	else{
 		$returnData['error'] = true;
