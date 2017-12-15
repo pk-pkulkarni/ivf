@@ -139,6 +139,25 @@ function update($data){
 	echo json_encode($result);
 }
 
+function deactivate($data){
+	global $conn;
+	$user_id = $data['user_id'];
+	
+	$result = array();
+	
+	$sql = "update user set status_id = 2 where user_id = $user_id"; // 2 is for Deactivate
+	
+	if(mysqli_query($conn, $sql)){
+		$result['success'] = true;
+		$result['msg'] = "Record is Deactivated Successfully";
+	} else{
+		$result['error'] = true;
+		$result['msg'] = "ERROR: Could not able to execute $sql. " . mysqli_error($conn);
+	}
+
+	echo json_encode($result);
+}
+
 function getById($data){
 	global $conn;
 	$id = (int)$data['user_id'];
