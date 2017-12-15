@@ -1,0 +1,17 @@
+<link rel="stylesheet" type="text/css" href="lib/ui-grid/ui-grid.min.css">
+<div class="box box-info" ng-controller="userCtrl" ng-init="init()">
+	<div class="box-header with-border">
+	  <h3 class="box-title">User Details</h3>
+	</div>
+	<!-- /.box-header -->
+	<!-- form start -->
+	<div class="box-body">
+        <div class="row">
+			<div class="col-md-12">			    
+				<a href="#!/userAdd" class="btn btn-info">Add User</a>
+				<div ui-grid=userGrid class="myGrid" ui-grid-pagination></div>
+			</div>			
+		</div>
+	</div>
+</div>
+
