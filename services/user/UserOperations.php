@@ -161,7 +161,7 @@ function deactivate($data){
 function getById($data){
 	global $conn;
 	$id = (int)$data['user_id'];
-	$sql = "SELECT u.*, r.name as role_name ,c.center_name FROM user u LEFT JOIN role r on u.role_id = r.role_id LEFT JOIN center c on u.center_id = c.center_id where u.user_id = $id";
+	$sql = "SELECT u.*, r.name as role_name ,c.center_name  FROM user u  LEFT JOIN role r on u.role_id = r.role_id LEFT JOIN user_to_center uc on u.user_id = uc.user_id LEFT JOIN center c on uc.center_id = c.center_id where u.user_id = $id";
 
 	$rows = $conn->query($sql);
 						
