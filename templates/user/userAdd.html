@@ -1,4 +1,4 @@
-<div class="box box-info" ng-controller="userCtrl" >
+<div class="box box-info" ng-controller="userCtrl" ng-init=initView()>
 	<div class="box-header with-border">
 	  <h3 class="box-title">Add User</h3>
 	</div>
@@ -42,32 +42,47 @@
 			            <input type="text" class="form-control" placeholder="Contact Number" ng-model="user.contact">
 			          </div>
 			        </div>
-					<div class="form-group">
-			          <label class="col-md-4 control-label">Password</label>
+					<div class="form-group" ng-show="showCenters">
+			          <label class="col-md-4 control-label">Center</label>
 
 			          <div class="col-md-8">
-			            <input type="text" class="form-control" placeholder="Password" ng-model="user.password">
+			            <select class="form-control" ng-options="center.id as center.name for center in centers" ng-model="selectedCenter"></select>
+			          </div>
+			        </div>
+			        <div class="form-group" ng-show="showCenters">
+			          <label class="col-md-4 control-label">Role</label>
+			          <div class="col-md-8">
+			            <select class="form-control" ng-options="role.role_id as role.name for role in roles" ng-model="user.role_id"></select>
 			          </div>
 			        </div>
 					<div class="form-group">
 			          <label class="col-md-4 control-label">Is Doctor</label>
 
 			          <div class="col-md-8">
-			            <input type="checkbox" ng-model="user.is_doctor">	
+			          	<div class="checkbox">
+			          		<label>
+			            		<input type="checkbox" ng-model="user.is_doctor">	
+			            	</label>
+			            </div>
 			          </div>
 			        </div>						
-				<div class="form-group">
+					<div class="form-group">
 			          <label class="col-md-4 control-label">Is Embryologist</label>
 
 			          <div class="col-md-8">
-			            <input type="checkbox"  ng-model="user.is_embryologist">	
+			          	<div class="checkbox">
+			          		<label>
+			            		<input type="checkbox"  ng-model="user.is_embryologist">	
+			            	</label>
+			            </div>
 			          </div>
 			        </div>
 			        <div class="form-group">
 			          <label class="col-md-4 control-label"></label>
 
 			          <div class="col-md-8">
-			            <a href="" class="btn btn-info" ng-click="addUpdateUser()">add</a>	
+			            <a href="" class="btn btn-info" ng-click="addUpdateUser()">Save</a>	
+			            <a href="#!/userDetails" class="btn btn-info">Cancel</a>
 			          </div>
 			        </div>
 			    </div>	    

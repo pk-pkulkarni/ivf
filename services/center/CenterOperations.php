@@ -105,6 +105,7 @@ function deactivate($data){
 		$result['success'] = true;
 		$result['msg'] = "Ceneter and it's user are deactivated successfully";
 	}
+	echo json_encode($result);
 }
 
 function getById($data){

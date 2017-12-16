@@ -44,7 +44,12 @@
 				}
 				centerService.centerOperations(operation).then(function(data){
 					console.log(data);					
-					$scope.centerGrid.data = arrangeData(data.data);
+					if(data.success == true){
+						$scope.centerGrid.data = arrangeData(data.data);	
+					}else if(data.error == true){
+						$location.path("/patientDetails");	
+					}
+					
 				})	
 			};
 
@@ -110,7 +115,7 @@
 					console.log(data);		
 					if(data.success == true)			
 						$scope.center = data.data[0];
-					else if (data.error = true) {
+					else if (data.error == true) {
 
 					}
 				})
@@ -126,7 +131,7 @@
 					console.log(data);		
 					if(data.success == true)			
 						$scope.center = data.data[0];
-					else if (data.error = true) {
+					else if (data.error == true) {
 
 					}
 				})	

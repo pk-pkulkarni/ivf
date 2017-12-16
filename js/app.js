@@ -1,7 +1,7 @@
 
 var ivfApp = angular.module("ivfApp", ["ngRoute", "oc.lazyLoad", "ngCookies", "ui.grid", "ui.grid.pagination"])
 		.config(["$routeProvider", function ($routeProvider) {
-		$routeProvider
+		$routeProvider		
 		.when("/patientDetails", {
 			templateUrl: "templates/patient/patientDetails.html",
 			controller: "patientCtrl",
@@ -39,6 +39,9 @@ var ivfApp = angular.module("ivfApp", ["ngRoute", "oc.lazyLoad", "ngCookies", "u
 			resolve: {
 				loadAsset: ['$ocLazyLoad', function($ocLazyLoad){
 					return $ocLazyLoad.load(['js/controllers/patient/patientCtrl.js']);
+				}]
+			}
+		})
 		.when("/logOut", {
 			templateUrl: "templates/logOut/logOut.html",
 			controller: "logOutCtrl",
