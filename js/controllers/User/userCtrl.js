@@ -106,7 +106,7 @@
 				}else{
 					deferred.resolve("");	
 				}		
-				return deferred.promise;
+				return deferred.promise;	
 			};
 
 			var saveUserDetails = function(){
@@ -133,7 +133,7 @@
 				});
 			};
 
-			$scope.viewUser = function(){
+			$scope.viewUser = function(){				
 				var operation = {
 					'operation' : 'getById',
 					'token' : $cookies.get('token'),
@@ -141,12 +141,32 @@
 				}
 				userService.userOperations(operation).then(function(data){
 					console.log(data);		
-					if(data.success == true)			
+					if(data.success == true){						
 						$scope.user = data.data[0];
+						if($location.url().indexOf('userEdit') >=0){
+							$scope.initView();
+							$scope.user.role_id = data.data[0].role_id;
+							
+							/*if($scope.user.is_doctor == 'Y'){
+								$scope.user.is_doctor = true;
+							}else{
+								$scope.user.is_doctor = false;
+							}
+
+							if($scope.user.is_embryologist == 'Y'){
+								$scope.user.is_embryologist = true;
+							}else{
+								$scope.user.is_embryologist = false;
+							}*/
+						}
+					}
 					else if (data.error = true) {
 
 					}
 				})
+				if($location.url().indexOf('userEdit') >=0){
+					
+				}
 			};
 
 			$scope.deleteuser = function(Id){
@@ -157,8 +177,9 @@
 				}
 				userService.userOperations(operation).then(function(data){
 					console.log(data);		
-					if(data.success == true)			
-						$scope.user = data.data[0];
+					if(data.success == true){
+
+					}									
 					else if (data.error = true) {
 
 					}

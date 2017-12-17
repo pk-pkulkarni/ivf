@@ -91,7 +91,8 @@ function add($data){
 			$txt = "Your Password is ".$str;
 			$headers = "From: ivf@noReply.com" . "\r\n";
 
-			$retval = mail($to,$subject,$txt,$headers);
+			//$retval = mail($to,$subject,$txt,$headers);
+			$retval = true;
 			if( $retval == true ) {
 				//
 			}else {
