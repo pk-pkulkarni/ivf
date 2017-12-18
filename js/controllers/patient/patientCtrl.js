@@ -110,8 +110,8 @@
                     name: 'Action',                    
                     width: '15%',
                     cellTemplate: '<div style="padding-left: 10px;"><div class="btn-group">' +
-                  		'<button type="button" class="btn btn-default btn-sm"><i class="fa fa-edit" ng-click="grid.appScope.editPatient(row.entity.Id);"></i></button>' +
-                  		'<button type="button" class="btn btn-default btn-sm"><i class="fa fa-reorder" ng-click="grid.appScope.ViewPatientDetailsForm(row.entity.Id);"></i></button>' +
+                    	'<a type="button" class="btn btn-default btn-sm" href="#!/patientEdit/{{row.entity.Id}}"><i class="fa fa-edit"></i></a>' +
+                    	'<a type="button" class="btn btn-default btn-sm" href="#!/patientView/{{row.entity.Id}}"><i class="fa fa-reorder"></i></a>' +                  		                  		
                   		'<button type="button" class="btn btn-default btn-sm"><i class="fa fa-trash-o" ng-click="grid.appScope.deletePatient(row.entity.Id);"></i></button></div></div>'
                 }
 			      /*{ field: 'Name'},
