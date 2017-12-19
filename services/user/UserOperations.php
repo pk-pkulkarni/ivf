@@ -123,11 +123,13 @@ function update($data){
 	$contact =  $data['contact'];
 	//$center_id = $data['center_id'];
 	$role_id = $data['role_id'];
+	$is_doctor = $data['is_doctor'];
+	$is_embryologist = $data['is_embryologist'];
 	$user_id = $data['user_id'];
 	
 	$result = array();
 
-	$sql = "update user set firstname = '$firstname',lastname = '$lastname',contact = $contact,role_id = $role_id where user_id = $user_id";
+	$sql = "update user set firstname = '$firstname',lastname = '$lastname',is_doctor = '$is_doctor',is_embryologist = '$is_embryologist',contact = $contact,role_id = $role_id where user_id = $user_id and status_id = 1"; //status_id = 1 for Active users
 
 	if(mysqli_query($conn, $sql)){
 		$result['success'] = true;
@@ -184,7 +186,7 @@ function getById($data){
 
 function get($data){
 	global $conn;
-	$sql = "SELECT u.*, r.name as role_name ,c.center_name  FROM user u  LEFT JOIN role r on u.role_id = r.role_id LEFT JOIN user_to_center uc on u.user_id = uc.user_id LEFT JOIN center c on uc.center_id = c.center_id";
+	$sql = "SELECT u.*, r.name as role_name ,c.center_name  FROM user u  LEFT JOIN role r on u.role_id = r.role_id LEFT JOIN user_to_center uc on u.user_id = uc.user_id LEFT JOIN center c on uc.center_id = c.center_id where u.status_id = 1";
 
 	$rows = $conn->query($sql);
 						

@@ -60,7 +60,7 @@ function update($data){
 	
 	$result = array();
 
-	$sql = "update center set center_name='$center_name',center_address='$center_address' where center_id = $center_id";
+	$sql = "update center set center_name='$center_name',center_address='$center_address' where center_id = $center_id and status_id = 1"; //Status 1 is for Active
 
 	if(mysqli_query($conn, $sql)){
 		$result['success'] = true;
@@ -137,7 +137,7 @@ function get($data){
 	global $token_role_name;
 	
 	if($token_role_name == "Super Admin"){
-		$sql = "select * from center";
+		$sql = "select * from center where status_id = 1"; // Status 1 is for active
 	
 		$rows = $conn->query($sql);
 							
