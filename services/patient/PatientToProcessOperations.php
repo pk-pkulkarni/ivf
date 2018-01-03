@@ -112,7 +112,7 @@ function deactivate($data){
 
 function get($data){
 	$resultData['error'] = true;
-	$result['msg'] = "No operation Provided";
+	$resultData['msg'] = "No operation Provided";
 	echo json_encode($resultData);
 }
 
